@@ -1,0 +1,31 @@
+.background-class {
+  background-image: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E5%BA%95%E5%9B%BE%E6%98%9F%E6%98%9F.jpg');
+  background-repeat: no-repeat;
+  min-height: 1400px;
+  /*background-color: #12121A;*/
+  background-color: #121315;
+}
+.head-resources {
+  background: #2D224B;
+  color: white;
+  float: left;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 5px 20px;
+  border-radius:25px;
+}
+.gold-coins-heap {
+  background: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%92%BB%E7%9F%B3%E5%BA%95%E5%9B%BE.png') no-repeat;
+  background-size:100% 100%;
+  height: 40px;
+  width: 40px;
+  margin:10px 10px;
+}
+.gold-coins-item {
+  background: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png') no-repeat;
+  background-size:100% 100%;
+
+  height:40px;
+  width: 40px;
+}
