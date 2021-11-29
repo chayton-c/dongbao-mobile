@@ -5,27 +5,92 @@
   /*background-color: #12121A;*/
   background-color: #121315;
 }
+
+.gold-coins-background {
+  background: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E5%A5%BD%E5%9F%8E%E5%B8%82.png') no-repeat center;
+  height: 350px;
+}
+
 .head-resources {
   background: #2D224B;
   color: white;
   float: left;
+  height: 40px;
   font-size: 16px;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 10px;
-  padding: 5px 20px;
-  border-radius:25px;
+  padding-left: 5px;
+  padding-right: 14px;
+  padding-bottom: 5px;
+  border-radius: 25px;
 }
+
 .gold-coins-heap {
   background: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%92%BB%E7%9F%B3%E5%BA%95%E5%9B%BE.png') no-repeat;
-  background-size:100% 100%;
+  background-size: 100% 100%;
   height: 40px;
   width: 40px;
-  margin:10px 10px;
+  margin: 10px 10px;
+  position: absolute;
 }
+
 .gold-coins-item {
   background: url('http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png') no-repeat;
-  background-size:100% 100%;
+  background-size: 100% 100%;
 
-  height:40px;
+  height: 40px;
   width: 40px;
+}
+
+.click-button {
+  background: red;
+  text-align: center;
+  position: relative;
+  top: 33%;
+  left: 18%;
+  width: 70%;
+  height: 30%;
+  line-height: 220%;
+  border-radius: 22px;
+  font-size: 14px;
+  color:#ffffff;
+}
+
+.bottom-activity-list {
+  padding: 0 10px 10px 10px
+}
+
+.bottom-activity-list-title-left {
+  height: 20px;font-size: 18px;font-weight: bold;color: #FFFFFF;font-family: Source Han Sans SC;
+}
+.bottom-activity-list-title-right {
+  color: #FFFFFF;
+  float: right;
+  line-height: 150%;
+}
+
+.icon-list-activity-content {
+  background: #FFFFFF;height: 120px;margin-top: 5px;border-radius:12px;overflow-x:scroll;
+}
+
+.icon-list-activity-item-div {
+  height: 80%;padding: 15px 16px 10px 12px;float: left
+}
+
+.button-activity-content {
+  background: #FFFFFF;height: 100px;margin-top: 5px;border-radius:12px;
+}
+
+.button-activity-content-top {
+  height: 50%;text-align: left;font-size: 16px;padding-left: 10%;font-weight: bold;
+}
+.button-activity-content-bottom {
+  height: 20%;text-align: left;color:#929292;padding-left: 10%;font-size: 12px
+}
+.button-activity-left {
+  float: left;height: 100%;width: 65%
+}
+
+.button-activity-right {
+  float: right;height: 100%;width: 35%
 }

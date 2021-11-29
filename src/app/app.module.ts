@@ -14,7 +14,7 @@ import { WechatAuthComponent } from './view/auth/wechat-auth/wechat-auth.compone
   declarations: [
     AppComponent,
     GoldCoinsReceiveComponent,
-    WechatAuthComponent
+    WechatAuthComponent,
   ],
   imports: [
     BrowserModule,

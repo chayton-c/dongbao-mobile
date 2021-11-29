@@ -1,22 +1,166 @@
+
 <div class="background-class">
+  <div style="display: none;" id="tencentAdvertise"></div>
   <div style="height: 100px">
-    <div class="head-resources">黑钻 199兑换</div>
-    <div class="head-resources">原理 883</div>
+    <div class="head-resources" style="float: left">
+      <img style="height: 50px;width: 50px"
+           src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
+      <span style="position: relative;top: -22px">199222222222 兑换</span>
+    </div>
+    <div class="head-resources" style="float: right;margin-right: 5px;padding-left: 10px">
+      <img style="height: 30px;width: 30px;position: relative;top: 8px"
+           src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+      <span style="position: relative;top: -2px">199222</span>
+    </div>
   </div>
-  <div style="height:40%">
+
+  <!-- 金币堆 -->
+  <div class="gold-coins-background">
     <div
-      *ngFor="let bar of bars"
+      *ngFor="let bar of goldCoinsHeaps"
       class="gold-coins-heap"
-      [style]="'position: absolute;top: ' + bar.top + 'px;left: ' + bar.left + 'px'"
+      [style]="'top: ' + bar.top + 'px;left: ' + bar.left + 'px'"
     >
       <div class="gold-coins-item">
       </div>
 
-      <div style="color: white">36.666</div>
+      <div style="color: white">{{bar.top.toFixed(2)}}</div>
     </div>
-
-
     <div>
     </div>
   </div>
+
+  <!-- 列表 -->
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left" (click)="taiho()">{{test111}}</span>
+    <div class="bottom-activity-list-title-right">第30天签到可领<span style="color: #f62828">88</span>能量</div>
+
+    <div class="icon-list-activity-content">
+      <div style="width: 100000px">
+        <div *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" [id]="i" class="icon-list-activity-item-div">
+          <div>
+            <img style="height: 40px;width: 40px;"
+                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+          </div>
+          <div style="width: 100%;text-align: center">
+            5
+          </div>
+          <div style="width: 100%;text-align: center;margin-top: 8px;color: #909090;">
+            {{i}}天
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">绑定手机号获得永久能量</span>
+    <div class="bottom-activity-list-title-right">立即获得<span style="color: #f62828">2</span>个永久能量</div>
+
+    <div class="button-activity-content">
+      <div class="button-activity-left">
+        <div class="button-activity-content-top">
+          <div style="position: relative;top: 40%;">绑定手机号获得<span style="color: red">永久</span>能量</div>
+        </div>
+        <div class="button-activity-content-bottom">
+          <div style="position: relative;top: 10%;">立即获得两个永久能量</div>
+        </div>
+      </div>
+
+      <div class="button-activity-right">
+        <div class="click-button">
+          去绑定
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">邀请好友获得钻石</span>
+    <div class="bottom-activity-list-title-right">限制最多邀请<span style="color: #f62828">30</span>位好友</div>
+
+    <div class="button-activity-content">
+      <div class="button-activity-left">
+        <div class="button-activity-content-top">
+          <div style="position: relative;top: 40%;">邀请好友获得<span style="color: red">500</span>现金</div>
+        </div>
+        <div class="button-activity-content-bottom">
+          <div style="position: relative;top: 10%;">邀请人越多 提现金额越大</div>
+        </div>
+      </div>
+
+      <div class="button-activity-right">
+        <div class="click-button">
+          邀请好友
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">点外卖购物赚能量</span>
+    <div class="bottom-activity-list-title-right">每次最多获得<span style="color: #f62828">300</span>能量</div>
+
+    <div class="button-activity-content">
+      <div class="button-activity-left">
+        <div class="button-activity-content-top">
+          <div style="position: relative;top: 40%;">邀请好友获得<span style="color: red">500</span>现金</div>
+        </div>
+        <div class="button-activity-content-bottom">
+          <div style="position: relative;top: 10%;">邀请人越多 提现金额越大</div>
+        </div>
+      </div>
+
+      <div class="button-activity-right">
+        <div class="click-button">
+          去购物
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">限时领钻石</span>
+    <div class="bottom-activity-list-title-right">每天最多领<span style="color: #f62828">80</span>钻石</div>
+
+    <div class="icon-list-activity-content" style="height: 150px">
+      <div style="width: 100000px">
+        <div *ngFor="let energyTime of energyTimes" class="icon-list-activity-item-div" style="padding-right: 0;">
+          <div>
+            <img style="height: 60px;width: 60px;text-align: center"
+                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
+          </div>
+          <div style="width: 100%;text-align: center;font-weight: bold">
+            {{energyTime.time}}
+          </div>
+          <div [ngSwitch]="energyTime.status" style="text-align: center">
+            <div *ngSwitchCase="0">已过期</div>
+            <div *ngSwitchCase="1">领取</div>
+            <div *ngSwitchCase="2">已领取</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">商城浏览商品所及获得能量</span>
+
+    <div class="button-activity-content">
+      <div class="button-activity-left">
+        <div class="button-activity-content-top">
+          <div style="position: relative;top: 40%;">商城浏览商品所及获得能量</div>
+        </div>
+      </div>
+
+      <div class="button-activity-right">
+        <div class="click-button">
+          去浏览
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
