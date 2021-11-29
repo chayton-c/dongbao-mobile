@@ -30,10 +30,32 @@
     </div>
   </div>
 
-  <!-- 列表 -->
   <div class="bottom-activity-list">
-    <span class="bottom-activity-list-title-left" (click)="taiho()">{{test111}}</span>
+    <span class="bottom-activity-list-title-left">每日签到领能量</span>
     <div class="bottom-activity-list-title-right">第30天签到可领<span style="color: #f62828">88</span>能量</div>
+
+    <div class="icon-list-activity-content">
+      <div style="width: 100000px">
+        <div *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" [id]="i" class="icon-list-activity-item-div">
+          <div>
+            <img style="height: 40px;width: 40px;"
+                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+          </div>
+          <div style="width: 100%;text-align: center">
+            5
+          </div>
+          <div style="width: 100%;text-align: center;margin-top: 8px;color: #909090;">
+            {{i}}天
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-activity-list">
+    <span class="bottom-activity-list-title-left">看视频赚能量</span>
+    <div class="bottom-activity-list-title-right">获得<span style="color: #f62828">2</span>个永久能量</div>
 
     <div class="icon-list-activity-content">
       <div style="width: 100000px">

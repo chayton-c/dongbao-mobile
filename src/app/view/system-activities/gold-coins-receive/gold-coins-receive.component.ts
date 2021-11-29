@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GoldCoinsHeap} from "../../../pojo/gold-coins-heap";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-gold-coins-receive',
@@ -8,9 +9,7 @@ import {GoldCoinsHeap} from "../../../pojo/gold-coins-heap";
 })
 export class GoldCoinsReceiveComponent implements OnInit {
 
-  constructor() {
-  }
-
+  customerId: number | undefined;
   goldCoinsHeaps: GoldCoinsHeap[] = [];
   energyTimes: {
     time: string,
@@ -33,9 +32,22 @@ export class GoldCoinsReceiveComponent implements OnInit {
       status: 2
     },
   ];
-  test111 = "233";
+
+  constructor(private http: HttpClient) {
+  }
+
 
   ngOnInit(): void {
+    let params = {
+      customerId: this.customerId,
+    }
+    this.http.post('/api/mobile/mobileApproveAppeal/handleAppeal?_allow_anonymous=true', params, {
+      headers: {
+      }
+    }).subscribe((res) => {
+      console.log(res)
+    });
+
     this.initHeap();
     console.log(this.goldCoinsHeaps);
     console.log(Math.random());
@@ -70,10 +82,6 @@ export class GoldCoinsReceiveComponent implements OnInit {
         goldCoinsHeap.top = this.getRandomNumber(100, 350);
       }
     }
-  }
-
-  taiho() {
-    debugger;
   }
 
   akagi() {
