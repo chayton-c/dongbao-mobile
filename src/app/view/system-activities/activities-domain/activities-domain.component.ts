@@ -1,14 +1,13 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {GoldCoinsHeap, GoldCoinsHeapConstant} from "../../../pojo/currency/gold-coins-heap";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
-import {Customer} from "../../../pojo/system/customer";
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {EnergyGiftActivity, EnergyGiftActivityConstant} from "../../../pojo/currency/energy-gift-activity";
 import {GoldCoinsGiftActivityConstant, GoldCoinsGifyActivity} from "../../../pojo/currency/gold-coins-gify-activity";
+import {GoldCoinsHeap, GoldCoinsHeapConstant} from "../../../pojo/currency/gold-coins-heap";
+import {Customer} from "../../../pojo/system/customer";
+import {HttpClient} from "@angular/common/http";
 import {ToastService} from "ng-zorro-antd-mobile";
-import {animate, group, query, state, style, transition, trigger} from "@angular/animations";
 import {ViewportScroller} from "@angular/common";
-
+import {ActivatedRoute} from "@angular/router";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 let goldCoinsUpAndDown = trigger('goldCoinsUpAndDown', [
   // ...
@@ -43,15 +42,15 @@ let receiveGoldCoinsHeaps = trigger('receiveGoldCoinsHeaps', [
 ]);
 
 @Component({
-  selector: 'app-gold-coins-receive',
-  templateUrl: './gold-coins-receive.component.html',
-  styleUrls: ['./gold-coins-receive.component.css'],
+  selector: 'app-activities-domain',
+  templateUrl: './activities-domain.component.html',
+  styleUrls: ['./activities-domain.component.less'],
   animations: [
     goldCoinsUpAndDown,
     receiveGoldCoinsHeaps
   ],
 })
-export class GoldCoinsReceiveComponent implements OnInit {
+export class ActivitiesDomainComponent implements OnInit {
 
   energyGiftActivityConstant: EnergyGiftActivityConstant = new EnergyGiftActivityConstant();
   goldCoinsGiftActivityConstant: GoldCoinsGiftActivityConstant = new GoldCoinsGiftActivityConstant();
