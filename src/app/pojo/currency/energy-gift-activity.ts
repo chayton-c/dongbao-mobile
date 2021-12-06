@@ -9,6 +9,7 @@ export class EnergyGiftActivity {
 
   signInStatus?: number; // 签到状态
   watchingAdCountEnergyCount?: number; // 已看了多少次视频
+  currentSign?: boolean; //
 }
 
 export class EnergyGiftActivityConstant {

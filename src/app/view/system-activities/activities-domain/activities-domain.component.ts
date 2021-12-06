@@ -6,8 +6,9 @@ import {Customer} from "../../../pojo/system/customer";
 import {HttpClient} from "@angular/common/http";
 import {ToastService} from "ng-zorro-antd-mobile";
 import {ViewportScroller} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Title} from "@angular/platform-browser";
 
 let goldCoinsUpAndDown = trigger('goldCoinsUpAndDown', [
   // ...
@@ -41,6 +42,9 @@ let receiveGoldCoinsHeaps = trigger('receiveGoldCoinsHeaps', [
   ]),
 ]);
 
+/**
+ * 金币活动主页
+ */
 @Component({
   selector: 'app-activities-domain',
   templateUrl: './activities-domain.component.html',
@@ -64,7 +68,7 @@ export class ActivitiesDomainComponent implements OnInit {
   dailySignInEnergyGiftActivities: EnergyGiftActivity[] = [];
   watchingAdEnergyGiftActivitySettings: EnergyGiftActivity | undefined;
   watchingAdEnergyGiftActivities: EnergyGiftActivity[] = [];
-  dailySignInEnergyGiftActivityPendingSignedThreshold: number = 0;
+  currentSignIndex: number = 0;
   watchingAdCountEnergyCount: number = 0;
 
   goldCoinsHeapCommander = 1;
@@ -73,11 +77,15 @@ export class ActivitiesDomainComponent implements OnInit {
     private http: HttpClient,
     private _toast: ToastService,
     private cdr: ChangeDetectorRef,
+    private titleService: Title,
+    public router: Router,
     private viewportScroller: ViewportScroller,
     private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle("钻石收取");
+
     setInterval(() => {
       if (this.goldCoinsHeapCommander > 0) {
         this.goldCoinsHeapCommander = this.goldCoinsHeapCommander - 2;
@@ -106,11 +114,12 @@ export class ActivitiesDomainComponent implements OnInit {
       this.receiveAtFixTimeGoldCoinsGiftActivities = res.receiveAtFixTimeGoldCoinsGiftActivities;
       this.dailySignInEnergyGiftActivities = res.dailySignInEnergyGiftActivities;
 
-      this.dailySignInEnergyGiftActivityPendingSignedThreshold = this.dailySignInEnergyGiftActivities.find(x => x.signInStatus == this.energyGiftActivityConstant.PENDING_SIGNED)!.threshold!;
-      if (this.dailySignInEnergyGiftActivityPendingSignedThreshold < 5)
-        this.dailySignInEnergyGiftActivityPendingSignedThreshold = 0
+      // 用currentSignIndex设置滚动条的scrollLeft
+      this.currentSignIndex = this.dailySignInEnergyGiftActivities.find(x => x.currentSign)!.threshold!;
+      if (this.currentSignIndex < 5)
+        this.currentSignIndex = 0
       else
-        this.dailySignInEnergyGiftActivityPendingSignedThreshold -= 3;
+        this.currentSignIndex -= 3;
 
       this.watchingAdEnergyGiftActivitySettings = res.watchingAdEnergyGiftActivity;
       let watchingAdEnergyGiftActivityThreshold = this.watchingAdEnergyGiftActivitySettings?.threshold!;
@@ -119,9 +128,9 @@ export class ActivitiesDomainComponent implements OnInit {
         this.watchingAdCountEnergyCount = 0
       else
         this.watchingAdCountEnergyCount -= 3;
-      for (let i = 0; i < watchingAdEnergyGiftActivityThreshold; i++) {
+
+      for (let i = 0; i < watchingAdEnergyGiftActivityThreshold; i++)
         this.watchingAdEnergyGiftActivities.push(this.watchingAdEnergyGiftActivitySettings!)
-      }
 
       this.cdr.detectChanges();
       this.mapGoldCoins(this.goldCoinsHeaps);
@@ -129,6 +138,26 @@ export class ActivitiesDomainComponent implements OnInit {
 
   }
 
+  /**
+   * 每日签到领取金币
+   */
+  dailySignIn(dailySignInEnergyGiftActivity: EnergyGiftActivity) {
+    this.http.post('/api/mobile/goldCoinsReceive/dailySignIn?customerId=' + this.customerId, null).subscribe((res: any) => {
+      if (!res.success) {
+        this._toast.fail(res.msg, 3000, () => {}, false);
+        return;
+      }
+
+      this._toast.success('领取成功', 3000, () => {
+      }, false);
+      dailySignInEnergyGiftActivity.signInStatus = this.energyGiftActivityConstant.SIGNED;
+      this.customer.energy! += dailySignInEnergyGiftActivity.amount!;
+    });
+  }
+
+  /**
+   * 把金币放到屏幕上的随机位置
+   */
   mapGoldCoins(goldCoinsHeaps: GoldCoinsHeap[]) {
     for (let i = 0; i < goldCoinsHeaps.length; i++) {
       let goldCoinsHeap = goldCoinsHeaps[i];
@@ -149,6 +178,9 @@ export class ActivitiesDomainComponent implements OnInit {
     }
   }
 
+  /**
+   * 按时间段收取金币
+   */
   receiveAtFixTime(receiveAtFixTimeGoldCoinsGiftActivity: GoldCoinsGifyActivity) {
     this.http.post('/api/mobile/goldCoinsReceive/receiveAtFixTime?customerId=' + this.customerId, null).subscribe((res: any) => {
       if (!res.success) {
@@ -163,6 +195,9 @@ export class ActivitiesDomainComponent implements OnInit {
     });
   }
 
+  /**
+   * 收取金币堆
+   */
   receiveGoldCoinsHeap(goldCoinsHeap: GoldCoinsHeap) {
     goldCoinsHeap.receivedStatus = this.goldCoinsHeapConstant.RECEIVED;
 
@@ -184,6 +219,9 @@ export class ActivitiesDomainComponent implements OnInit {
     }, 1000)
   }
 
+  /**
+   * 拉取用户剩余的金币堆
+   */
   reloadGoldCoinsHeap() {
     this.http.post('/api/mobile/goldCoinsReceive/reloadGoldCoinsHeap?customerId=' + this.customerId, null).subscribe((res: any) => {
         if (!res.success) return;
@@ -195,6 +233,12 @@ export class ActivitiesDomainComponent implements OnInit {
         this.mapGoldCoins(this.goldCoinsHeaps);
       }
     );
+  }
+
+  jump2GoldCoinsWithdrawalPage() {
+    this.router.navigate(['/system-activities/gold-coins-withdrawal'], {
+      queryParams: { customerId: this.customerId },
+    });
   }
 
   akagi() {

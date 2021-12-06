@@ -3,12 +3,13 @@
   <div style="height: 100px">
     <div class="head-resources" style="float: left">
       <img style="height: 50px;width: 50px"
-           src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
-      <span style="position: relative;top: -22px">{{customer.goldCoinsNumber?.toFixed(3) + ''}} 兑换</span>
+           src="http://shenghenduooss.gohong.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
+      <span style="position: relative;top: -22px">{{customer.goldCoinsNumber?.toFixed(3) + ''}} </span>
+      <span style="position: relative;top: -22px" (click)="jump2GoldCoinsWithdrawalPage()">兑换</span>
     </div>
     <div class="head-resources" style="float: right;margin-right: 5px;padding-left: 10px">
       <img style="height: 30px;width: 30px;position: relative;top: 8px"
-           src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+           src="http://shenghenduooss.gohong.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
       <span style="position: relative;top: -2px"> {{customer.energy?.toFixed(3)}}</span>
     </div>
   </div>
@@ -42,7 +43,7 @@
     <div
       class="icon-list-activity-content"
       #scrollMe
-      [scrollLeft]="scrollMe.scrollWidth * (dailySignInEnergyGiftActivityPendingSignedThreshold / dailySignInEnergyGiftActivities.length)"
+      [scrollLeft]="scrollMe.scrollWidth * (currentSignIndex / dailySignInEnergyGiftActivities.length)"
     >
       <div [style]="'width: ' + dailySignInEnergyGiftActivities.length * 73 + 'px;'" >
         <div
@@ -51,7 +52,7 @@
         >
           <div>
             <img style="height: 40px;width: 40px;"
-                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+                 src="http://shenghenduooss.gohong.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
           </div>
           <div style="width: 100%;text-align: center">
             {{dailySignInEnergyGiftActivity.amount}}
@@ -70,6 +71,7 @@
               {{dailySignInEnergyGiftActivity.threshold}}天已
             </div>
             <div
+              (click)="dailySignIn(dailySignInEnergyGiftActivity)"
               *ngSwitchCase="energyGiftActivityConstant.PENDING_SIGNED"
               style="width: 100%;text-align: center;margin-top: 8px;color: #909090;"
             >
@@ -97,7 +99,7 @@
         <div *ngFor="let watchingAdEnergyGiftActivity of watchingAdEnergyGiftActivities" class="icon-list-activity-item-div">
           <div>
             <img style="height: 40px;width: 40px;"
-                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
+                 src="http://shenghenduooss.gohong.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E8%83%BD%E9%87%8F.png" alt="">
           </div>
           <div style="width: 100%;text-align: center">
             {{watchingAdEnergyGiftActivity.amount + ''}}
@@ -187,7 +189,7 @@
              style="width: 25%;padding: 16px 0 16px 0">
           <div style="text-align: center">
             <img style="height: 60px;width: 60px;text-align: center"
-                 src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
+                 src="http://shenghenduooss.gohong.com/upload/system/gold-coins-receive/%E9%AB%98%E6%B8%85%E9%92%BB%E7%9F%B3.png" alt="">
           </div>
           <div style="width: 100%;text-align: center;font-weight: bold;font-size: 10px">
             {{ receiveAtFixTimeGoldCoinsGiftActivity.startTime | date: 'HH:mm' }}
