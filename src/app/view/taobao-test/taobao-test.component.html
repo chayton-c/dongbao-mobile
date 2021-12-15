@@ -1,0 +1,23 @@
+<div>
+  <input type="text" [(ngModel)]="keyword"/>
+  <button (click)="searchGoods()">搜索</button>
+</div>
+<div *ngFor="let goods of goodsList">
+  <div>
+    {{goods.title}}
+  </div>
+  <div>
+    {{goods.shortTitle}}
+  </div>
+  <img style="width: 100%" [src]="goods.image"/>
+  <div>
+    {{goods.priceAfterCoupon}}
+  </div>
+  <div style="width: 400px;color: blue" (click)="copyInputMessage(goods.shareUrl)">
+    {{goods.shareUrl}}
+  </div>
+  ============================
+  ============================
+  ============================
+  ============================
+</div>
