@@ -1,6 +1,27 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Form} from "@angular/forms";
 
 export class HttpUtils {
+
+  public static createBody(params: any): FormData {
+    let dataForm : FormData = new FormData();
+    for (let key in params) {
+      if (params[key] != undefined && params[key] != null && !Array.isArray(params[key])) {
+        params[key] = params[key];
+        dataForm.append(key, params[key]);
+      }
+    }
+    return dataForm;
+  }
+
+  public static createHttpOptions(): any {
+    return {
+      headers: [
+        'Content-Type', 'application/json'
+      ]
+    };
+  }
+
   public static transform(value: any): any {
     let params: any = {};
     for (let key in value) {
@@ -39,7 +60,5 @@ export class HttpUtils {
 
     return rawHttp.get(url, httpOptions);
   }
-
-
 
 }

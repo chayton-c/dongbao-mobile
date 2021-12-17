@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {ToastService} from "ng-zorro-antd-mobile";
 import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ViewportScroller} from "@angular/common";
 import {Goods} from "../../pojo/goods/goods";
+import {HttpUtils} from "../../util/http/http-util";
 
 @Component({
   selector: 'app-taobao-test',
@@ -15,6 +16,7 @@ export class TaobaoTestComponent implements OnInit {
 
   keyword: string = "";
   goodsList: Goods[] = [];
+  customerId: string = "";
 
   constructor(
     private http: HttpClient,
@@ -23,12 +25,16 @@ export class TaobaoTestComponent implements OnInit {
     private titleService: Title,
     public router: Router,
     private viewportScroller: ViewportScroller,
-    private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit(): void {
+    private activatedRoute: ActivatedRoute) {
   }
 
-  copyInputMessage(val: string){
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((queryParams) => {
+      if (queryParams.customerId) this.customerId = queryParams.customerId;
+    });
+  }
+
+  copyInputMessage(val: string) {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -48,9 +54,15 @@ export class TaobaoTestComponent implements OnInit {
       return;
     }
 
-    this.http.post('/api/app/goods/search?platform=1&page=1&debug=true&customerId=1&keyword=' + this.keyword, null, {
-      headers: {}
-    }).subscribe((res: any) => {
+    let param = {
+      customerId: this.customerId,
+      keyword: this.keyword!,
+      platform: 1,
+      page: 1,
+      debug: true
+    }
+
+    this.http.post('/api/app/goods/search', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
       console.log(res)
       this.goodsList = res.goods;
     });

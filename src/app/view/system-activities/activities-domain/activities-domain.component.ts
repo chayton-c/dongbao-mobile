@@ -60,7 +60,7 @@ export class ActivitiesDomainComponent implements OnInit {
   goldCoinsGiftActivityConstant: GoldCoinsGiftActivityConstant = new GoldCoinsGiftActivityConstant();
   goldCoinsHeapConstant: GoldCoinsHeapConstant = new GoldCoinsHeapConstant();
 
-  customerId: number | undefined;
+  customerId: string | undefined;
   customer: Customer = {};
   goldCoinsHeaps: GoldCoinsHeap[] = [];
   receiveAtFixTimeGoldCoinsGiftActivities: GoldCoinsGifyActivity[] = [];
