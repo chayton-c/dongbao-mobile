@@ -1,6 +1,12 @@
+<h1>{{href}}</h1>
 <div>
-  <input type="text" [(ngModel)]="keyword"/>
-  <button (click)="searchGoods()">搜索</button>
+  <input type="text" [(ngModel)]="keyword" style="height: 25px"/>&nbsp;&nbsp;
+  <button (click)="searchGoods()">搜索淘宝</button>&nbsp;&nbsp;
+  <button (click)="generateWaimaiActivityLink()">美团外卖</button>&nbsp;&nbsp;
+  <button (click)="generateShengxianActivityLink()">美团生鲜</button>&nbsp;&nbsp;
+  <button (click)="jump2ActivitiesDomain()">收取金币</button>&nbsp;&nbsp;
+  <button (click)="generateElemeWaimaiActivityLink('20150318019998877')">饿了吗外卖</button>&nbsp;&nbsp;
+  <button (click)="generateElemeWaimaiActivityLink('20150318020004284')">饿了吗百货</button>&nbsp;&nbsp;
 </div>
 <div *ngFor="let goods of goodsList">
   <div>
@@ -11,7 +17,10 @@
   </div>
   <img style="width: 100%" [src]="goods.image"/>
   <div>
-    {{goods.priceAfterCoupon}}
+    券后价：{{goods.priceAfterCoupon}}
+  </div>
+  <div>
+    佣金：{{goods.commissionAmount * 0.55}}
   </div>
   <div style="width: 400px;color: blue" (click)="copyInputMessage(goods.shareUrl)">
     {{goods.shareUrl}}

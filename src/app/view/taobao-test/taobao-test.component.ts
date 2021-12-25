@@ -17,6 +17,7 @@ export class TaobaoTestComponent implements OnInit {
   keyword: string = "";
   goodsList: Goods[] = [];
   customerId: string = "";
+  href: string = "";
 
   constructor(
     private http: HttpClient,
@@ -29,12 +30,15 @@ export class TaobaoTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.href = window.location.href;
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
     });
   }
 
   copyInputMessage(val: string) {
+    this._toast.success('已复制信息' + val, 3000, () => {
+    }, false);
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -65,6 +69,47 @@ export class TaobaoTestComponent implements OnInit {
     this.http.post('/api/app/goods/search', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
       console.log(res)
       this.goodsList = res.goods;
+    });
+  }
+
+  jump2ActivitiesDomain() {
+    this.router.navigate(['/system-activities/activities-domain'], {
+      queryParams: { customerId: this.customerId },
+    });
+  }
+
+  generateWaimaiActivityLink() {
+    let param = {
+      customerId: this.customerId,
+      debug: true
+    }
+
+    this.http.post('/api/app/meituanLianmeng/generateWaimaiActivityLink', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
+      console.log(res)
+      window.location.href = res.link;
+    });
+  }
+
+  generateShengxianActivityLink() {
+    let param = {
+      customerId: this.customerId,
+      debug: true
+    }
+
+    this.http.post('/api/app/meituanLianmeng/generateShengxianActivityLink', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
+      console.log(res)
+      window.location.href = res.link;
+    });
+  }
+  generateElemeWaimaiActivityLink(activityId: string) {
+    let param = {
+      customerId: this.customerId,
+      activityId: activityId,
+      debug: true
+    }
+
+    this.http.post('/api/app/meituanLianmeng/generateElemeWaimaiActivityLink', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
+      window.location.href = res.link;
     });
   }
 }

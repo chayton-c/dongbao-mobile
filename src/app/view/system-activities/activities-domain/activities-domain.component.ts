@@ -71,7 +71,7 @@ export class ActivitiesDomainComponent implements OnInit {
   currentSignIndex: number = 0;
   watchingAdCountEnergyCount: number = 0;
 
-  goldCoinsHeapCommander = 1;
+  goldCoinsHeapShakeCommander = 1;
 
   constructor(
     private http: HttpClient,
@@ -86,13 +86,14 @@ export class ActivitiesDomainComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle("钻石收取");
 
+    // 金币晃动动画
     setInterval(() => {
-      if (this.goldCoinsHeapCommander > 0) {
-        this.goldCoinsHeapCommander = this.goldCoinsHeapCommander - 2;
+      if (this.goldCoinsHeapShakeCommander > 0) {
+        this.goldCoinsHeapShakeCommander = this.goldCoinsHeapShakeCommander - 2;
         return;
       }
-      if (this.goldCoinsHeapCommander < 0) {
-        this.goldCoinsHeapCommander = this.goldCoinsHeapCommander + 2;
+      if (this.goldCoinsHeapShakeCommander < 0) {
+        this.goldCoinsHeapShakeCommander = this.goldCoinsHeapShakeCommander + 2;
         return;
       }
     }, 1000);
@@ -199,6 +200,8 @@ export class ActivitiesDomainComponent implements OnInit {
    * 收取金币堆
    */
   receiveGoldCoinsHeap(goldCoinsHeap: GoldCoinsHeap) {
+    if (goldCoinsHeap.receivedStatus == this.goldCoinsHeapConstant.RECEIVED)
+      return;
     goldCoinsHeap.receivedStatus = this.goldCoinsHeapConstant.RECEIVED;
 
     setTimeout(() => {
