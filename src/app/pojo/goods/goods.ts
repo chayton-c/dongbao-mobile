@@ -30,7 +30,7 @@ export interface Goods {
   updateTime: Date;
 
   // pagefields
-  shareUrl: string; // 链接
+  shortLink: string; // 原链接
   customerCommission: number; // 用户佣金
-  shortLink: string; // 短连接
+  pinduoduoSearchId: string; // 拼多多searchId，转链的时候传进去加佣金
 }

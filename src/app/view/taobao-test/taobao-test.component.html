@@ -1,32 +1,34 @@
-<h1>{{href}}</h1>
-<div>
-  <input type="text" [(ngModel)]="keyword" style="height: 25px"/>&nbsp;&nbsp;
-  <button (click)="searchGoods()">搜索淘宝</button>&nbsp;&nbsp;
-  <button (click)="generateWaimaiActivityLink()">美团外卖</button>&nbsp;&nbsp;
-  <button (click)="generateShengxianActivityLink()">美团生鲜</button>&nbsp;&nbsp;
-  <button (click)="jump2ActivitiesDomain()">收取金币</button>&nbsp;&nbsp;
-  <button (click)="generateElemeWaimaiActivityLink('20150318019998877')">饿了吗外卖</button>&nbsp;&nbsp;
-  <button (click)="generateElemeWaimaiActivityLink('20150318020004284')">饿了吗百货</button>&nbsp;&nbsp;
-</div>
+<TextareaItem [rows]="keyword.length / 15" [(ngModel)]="keyword"> </TextareaItem>
+
 <div *ngFor="let goods of goodsList">
-  <div>
-    {{goods.title}}
-  </div>
-  <div>
-    {{goods.shortTitle}}
-  </div>
-  <img style="width: 100%" [src]="goods.image"/>
-  <div>
-    券后价：{{goods.priceAfterCoupon}}
-  </div>
-  <div>
-    佣金：{{goods.commissionAmount * 0.55}}
-  </div>
-  <div style="width: 400px;color: blue" (click)="copyInputMessage(goods.shareUrl)">
-    {{goods.shareUrl}}
-  </div>
-  ============================
-  ============================
-  ============================
-  ============================
+  <List [className]="'my-list'">
+    <img style="width: 100%" [src]="goods.image"/>
+    <ListItem wrap>{{goods.title}}</ListItem>
+
+    <ListItem [extra]="price">价格</ListItem>
+    <ng-template #price>
+      <div class="message1">{{goods.priceAfterCoupon.toFixed(2)}}元 <del>{{goods.price.toFixed(2)}}元</del></div>
+    </ng-template>
+
+    <ListItem [extra]="commission">佣金</ListItem>
+    <ng-template #commission>
+      <div class="message1">{{goods.commissionAmount}}元</div>
+    </ng-template>
+
+    <ListItem *ngIf="goods.shortLink" [extra]="shareUrl" wrap (click)="copyInputMessage(goods.shortLink)">链接</ListItem>
+    <ng-template #shareUrl>
+      <span style="color: blue" (click)="copyInputMessage(goods.shortLink)">{{goods.shortLink}}</span>
+    </ng-template>
+
+    <ListItem *ngIf="!goods.shortLink" wrap (click)="createGoodsLink(goods)">点击生成链接</ListItem>
+
+    <ListItem></ListItem>
+  </List>
+</div>
+
+<div style="position: fixed;bottom: 0;width: 100%">
+  <nzm-button (onClick)="searchGoods(2)" style="width: 20%;float: left;">淘宝</nzm-button>
+  <nzm-button (onClick)="searchGoods(1)" style="width: 20%;float: left;">京东</nzm-button>
+  <nzm-button (onClick)="searchGoods(3)" style="width: 20%;float: left;">拼多多</nzm-button>
+  <nzm-button (onClick)="showActionSheet()" style="width: 40%;float: left;">其他</nzm-button>
 </div>

@@ -9,6 +9,7 @@ import {ViewportScroller} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Title} from "@angular/platform-browser";
+import {HttpUtils} from "../../../util/http/http-util";
 
 let goldCoinsUpAndDown = trigger('goldCoinsUpAndDown', [
   // ...
@@ -102,7 +103,7 @@ export class ActivitiesDomainComponent implements OnInit {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
     });
 
-    this.http.post('/api/mobile/goldCoinsReceive/init?customerId=' + this.customerId, null, {
+    this.http.post('/api/mobile/currency/goldCoins/goldCoinsReceive/init?customerId=' + this.customerId, null, {
       headers: {}
     }).subscribe((res: any) => {
       console.log(res)
@@ -143,7 +144,7 @@ export class ActivitiesDomainComponent implements OnInit {
    * 每日签到领取金币
    */
   dailySignIn(dailySignInEnergyGiftActivity: EnergyGiftActivity) {
-    this.http.post('/api/mobile/goldCoinsReceive/dailySignIn?customerId=' + this.customerId, null).subscribe((res: any) => {
+    this.http.post('/api/mobile/currency/goldCoins/goldCoinsReceive/dailySignIn?customerId=' + this.customerId, null).subscribe((res: any) => {
       if (!res.success) {
         this._toast.fail(res.msg, 3000, () => {}, false);
         return;
@@ -183,7 +184,7 @@ export class ActivitiesDomainComponent implements OnInit {
    * 按时间段收取金币
    */
   receiveAtFixTime(receiveAtFixTimeGoldCoinsGiftActivity: GoldCoinsGifyActivity) {
-    this.http.post('/api/mobile/goldCoinsReceive/receiveAtFixTime?customerId=' + this.customerId, null).subscribe((res: any) => {
+    this.http.post('/api/mobile/currency/goldCoins/goldCoinsReceive/receiveAtFixTime?customerId=' + this.customerId, null).subscribe((res: any) => {
       if (!res.success) {
         this._toast.fail(res.msg, 3000, () => {}, false);
         return;
@@ -205,7 +206,12 @@ export class ActivitiesDomainComponent implements OnInit {
     goldCoinsHeap.receivedStatus = this.goldCoinsHeapConstant.RECEIVED;
 
     setTimeout(() => {
-      this.http.post('/api/mobile/goldCoinsReceive/receiveGoldCoinsHeap?goldCoinsHeapId=' + goldCoinsHeap.id, null).subscribe((res: any) => {
+
+      let param = {
+        goldCoinsHeapId: goldCoinsHeap.id,
+      }
+
+      this.http.post('/api/mobile/currency/goldCoins/goldCoinsReceive/receiveGoldCoinsHeap', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
         if (!res.success) {
           // this._toast.fail(res.msg, 3000, () => {}, false);
           return;
@@ -226,7 +232,7 @@ export class ActivitiesDomainComponent implements OnInit {
    * 拉取用户剩余的金币堆
    */
   reloadGoldCoinsHeap() {
-    this.http.post('/api/mobile/goldCoinsReceive/reloadGoldCoinsHeap?customerId=' + this.customerId, null).subscribe((res: any) => {
+    this.http.post('/api/mobile/currency/goldCoins/goldCoinsReceive/reloadGoldCoinsHeap?customerId=' + this.customerId, null).subscribe((res: any) => {
         if (!res.success) return;
         let goldCoinsHeaps: GoldCoinsHeap[] = res.goldCoinsHeaps;
         goldCoinsHeaps.forEach(x => {
