@@ -1,0 +1,57 @@
+<div style="background: #ffffff;height: 1000px;padding-top: 10px">
+  <div style="display: flex;flex-direction: row;margin: 0 10px 10px 10px" (click)="jump2AuthPage()">
+    <img src="http://url.gohong.com/zjy/logo.png?__inline" alt="" style="height: 40px;width: 40px">
+    <div style="margin-left: 10px;">
+      <p style="font-size: 14px;font-weight: bold;">下载省多多App</p>
+      <p style="color: #555555;font-size: 12px;margin-top: 5px;">每一次打开 都更有价值</p></div>
+    <button class="download-button">
+      立即下载
+    </button>
+  </div>
+  <WingBlank style="margin-top: 10px">
+    <Carousel
+      *ngIf="goods.bannerList"
+      [infinite]="true"
+      [vertical]="false"
+      [selectedIndex]="1"
+    >
+      <CarouselSlide *ngFor="let banner of goods.bannerList">
+        <div style="display: inline-block; width: 100%;height: 500px;">
+          <img
+            src="{{banner}}"
+            style=" pointer-events: none; width: 100%;height: 500px;"
+            alt=""/>
+        </div>
+      </CarouselSlide>
+    </Carousel>
+    <div>
+      <span style="color: red;font-size: 15px;font-weight: bold;">券后￥</span>
+      <span style="color: red;font-size: 22px;font-weight: bold;">{{goods.priceAfterCoupon}}</span>
+      <del style="margin-left: 5px;font-size: 12px;font-weight: 400;text-decoration: line-through">原价￥{{goods.price}}</del>
+      <span style="font-size: 13px;font-weight: 400;position: absolute;right: 10px;">月销{{goods.sales}}件</span>
+    </div>
+    <div>
+      <img *ngIf="goods.shopType != 101"
+           class="shop-type-icon"
+           src="http://shenghenduooss.gohong.com/upload/%E9%A6%96%E9%A1%B5/icons/%E6%B7%98%E5%AE%9D%E5%BA%97%E9%93%BA.png"
+           alt="">
+      <img *ngIf="goods.shopType == 101"
+           class="shop-type-icon"
+           src="http://shenghenduooss.gohong.com/upload/%E9%A6%96%E9%A1%B5/icons/%E5%A4%A9%E7%8C%AB%E5%BA%97%E9%93%BA.png"
+           alt="">
+      <p style="font-size: 14px; font-weight: bold; text-indent: 5px;">{{goods.title}}</p>
+    </div>
+    <div style="background: #F2F2F2;margin-top: 10px;border-radius: 5px;border: 1px dotted #333333;">
+      <p style="font-size: 12px;padding: 10px 20px;">{{goods.shortLink}}</p>
+    </div>
+    <div style="text-align: center;margin-top: 20px;">
+      <button *ngIf="!copied" class="copy-button" (click)="copyInputMessage(goods.shortLink!)">
+        去 购 买
+      </button>
+      <button *ngIf="copied" class="copy-button-copied">
+        复制成功，打开手机淘宝购买
+      </button>
+    </div>
+
+  </WingBlank>
+</div>

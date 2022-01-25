@@ -84,7 +84,10 @@ export class TaobaoTestComponent implements OnInit {
 
     this.http.post('/api/app/goods/createLink', HttpUtils.createBody(param), HttpUtils.createHttpOptions()).subscribe((res: any) => {
       goods.shortLink = res.shortLink;
-      this.copyInputMessage(goods.shortLink);
+      if (res.kouling)
+        goods.shortLink = res.kouling;
+
+      this.copyInputMessage(goods.shortLink!);
     });
   }
 

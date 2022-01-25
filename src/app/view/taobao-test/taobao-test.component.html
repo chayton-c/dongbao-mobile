@@ -7,7 +7,7 @@
 
     <ListItem [extra]="price">价格</ListItem>
     <ng-template #price>
-      <div class="message1">{{goods.priceAfterCoupon.toFixed(2)}}元 <del>{{goods.price.toFixed(2)}}元</del></div>
+      <div class="message1">{{goods.priceAfterCoupon!.toFixed(2)}}元 <del>{{goods.price!.toFixed(2)}}元</del></div>
     </ng-template>
 
     <ListItem [extra]="commission">佣金</ListItem>
@@ -15,9 +15,9 @@
       <div class="message1">{{goods.commissionAmount}}元</div>
     </ng-template>
 
-    <ListItem *ngIf="goods.shortLink" [extra]="shareUrl" wrap (click)="copyInputMessage(goods.shortLink)">链接</ListItem>
+    <ListItem *ngIf="goods.shortLink" [extra]="shareUrl" wrap (click)="copyInputMessage(goods.shortLink!)">链接</ListItem>
     <ng-template #shareUrl>
-      <span style="color: blue" (click)="copyInputMessage(goods.shortLink)">{{goods.shortLink}}</span>
+      <span style="color: blue" (click)="copyInputMessage(goods.shortLink!)">{{goods.shortLink!}}</span>
     </ng-template>
 
     <ListItem *ngIf="!goods.shortLink" wrap (click)="createGoodsLink(goods)">点击生成链接</ListItem>

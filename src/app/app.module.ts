@@ -15,6 +15,9 @@ import { GoldCoinsWithdrawalDetailComponent } from './view/system-activities/gol
 import { GoldCoinsWithdrawalComponent } from './view/system-activities/gold-coins-withdrawal/gold-coins-withdrawal.component';
 import { ActivitiesDomainComponent } from './view/system-activities/activities-domain/activities-domain.component';
 import { TaobaoTestComponent } from './view/taobao-test/taobao-test.component';
+import { TaobaoGoodsComponent } from './view/taobao-goods/taobao-goods.component';
+import { TutorialComponent } from './view/tutorial/tutorial.component';
+import { TutorialDetailComponent } from './view/tutorial-detail/tutorial-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { TaobaoTestComponent } from './view/taobao-test/taobao-test.component';
     GoldCoinsWithdrawalComponent,
     ActivitiesDomainComponent,
     TaobaoTestComponent,
+    TaobaoGoodsComponent,
+    TutorialComponent,
+    TutorialDetailComponent,
   ],
   imports: [
     BrowserModule,

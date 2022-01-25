@@ -34,6 +34,10 @@ export class WechatAuthComponent implements OnInit {
       if (queryParams.code) this.code = queryParams.code;
       if (queryParams.encryptCustomerId) this.encryptCustomerId = queryParams.encryptCustomerId;
     });
+    // if (!this.code) {
+    //   window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf965489b2b9d401d&redirect_uri=http%3A%2F%2Fserver.bogufangzhou.com%2Fauth%2Fwechat-auth%3FencryptCustomerId%3DECEF5EC33432A9B37BC498F989CAD51D&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+    // }
+
     let params = {
       code: this.code,
       encryptCustomerId: this.encryptCustomerId
