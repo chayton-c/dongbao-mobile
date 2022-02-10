@@ -175,7 +175,7 @@ export class TaobaoTestComponent implements OnInit {
       buttonIndex => {
         switch (buttonIndex) {
           case 0: // '美团外卖',
-            this.generateMeituanActivityLink('2');
+            this.generateMeituanActivityLink('33');
             break;
           case 1: // '美团生鲜',
             this.generateMeituanActivityLink('4');

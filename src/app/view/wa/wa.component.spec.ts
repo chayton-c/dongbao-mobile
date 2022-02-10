@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WechatAuthComponent } from './wechat-auth.component';
+import { WaComponent } from './wa.component';
 
-describe('WechatAuthComponent', () => {
-  let component: WechatAuthComponent;
-  let fixture: ComponentFixture<WechatAuthComponent>;
+describe('WaComponent', () => {
+  let component: WaComponent;
+  let fixture: ComponentFixture<WaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WechatAuthComponent ]
+      declarations: [ WaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WechatAuthComponent);
+    fixture = TestBed.createComponent(WaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

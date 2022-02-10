@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
-import { WechatAuthComponent } from './view/auth/wechat-auth/wechat-auth.component';
 import { TestComponent } from './view/test/test.component';
 import { GoldCoinsDetailComponent } from './view/system-activities/gold-coins-detail/gold-coins-detail.component';
 import { EnergyDetailComponent } from './view/system-activities/energy-detail/energy-detail.component';
@@ -18,11 +17,11 @@ import { TaobaoTestComponent } from './view/taobao-test/taobao-test.component';
 import { TaobaoGoodsComponent } from './view/taobao-goods/taobao-goods.component';
 import { TutorialComponent } from './view/tutorial/tutorial.component';
 import { TutorialDetailComponent } from './view/tutorial-detail/tutorial-detail.component';
+import { WaComponent } from './view/wa/wa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WechatAuthComponent,
     TestComponent,
     GoldCoinsDetailComponent,
     EnergyDetailComponent,
@@ -33,6 +32,7 @@ import { TutorialDetailComponent } from './view/tutorial-detail/tutorial-detail.
     TaobaoGoodsComponent,
     TutorialComponent,
     TutorialDetailComponent,
+    WaComponent,
   ],
   imports: [
     BrowserModule,
