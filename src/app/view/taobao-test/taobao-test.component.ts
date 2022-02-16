@@ -20,6 +20,7 @@ export class TaobaoTestComponent implements OnInit {
   customerId: string = "";
   platform: Platform = new Platform();
   href: string = "";
+  showCommission: boolean = false;
   thumbStyle = {
     width: '32px',
     height: '32px'
@@ -41,6 +42,7 @@ export class TaobaoTestComponent implements OnInit {
     this.href = window.location.href;
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
+      if (queryParams.showCommission) this.showCommission = queryParams.showCommission;
     });
   }
 
@@ -120,9 +122,9 @@ export class TaobaoTestComponent implements OnInit {
   }
 
   jump2ActivitiesDomain() {
-    this.router.navigate(['/system-activities/activities-domain'], {
-      queryParams: {customerId: this.customerId},
-    });
+    // this.router.navigate(['/system-activities/activities-domain'], {
+    //   queryParams: {customerId: this.customerId},
+    // });
   }
 
   generateMeituanActivityLink(activityId: string) {

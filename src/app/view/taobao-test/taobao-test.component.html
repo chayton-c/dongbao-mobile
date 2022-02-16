@@ -10,10 +10,12 @@
       <div class="message1">{{goods.priceAfterCoupon!.toFixed(2)}}元 <del>{{goods.price!.toFixed(2)}}元</del></div>
     </ng-template>
 
-    <ListItem [extra]="commission">佣金</ListItem>
-    <ng-template #commission>
-      <div class="message1">{{goods.commissionAmount}}元</div>
-    </ng-template>
+    <div *ngIf="showCommission">
+      <ListItem [extra]="commission">佣金</ListItem>
+      <ng-template #commission>
+        <div class="message1">{{goods.commissionAmount! * 0.55}}元</div>
+      </ng-template>
+    </div>
 
     <ListItem *ngIf="goods.shortLink" [extra]="shareUrl" wrap (click)="copyInputMessage(goods.shortLink!)">链接</ListItem>
     <ng-template #shareUrl>

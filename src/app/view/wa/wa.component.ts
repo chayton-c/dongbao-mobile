@@ -35,6 +35,13 @@ export class WaComponent implements OnInit {
       if (queryParams.code) this.code = queryParams.code;
       if (queryParams.e) this.customerId = queryParams.e;
     });
+    if (!this.code) {
+      let rawUri = window.location.href;
+      let encode = encodeURI(rawUri);
+
+      window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + this.appid + "&redirect_uri=" + encode + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+      return;
+    }
 
     let params = {
       code: this.code,
