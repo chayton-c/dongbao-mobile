@@ -18,6 +18,8 @@ import { TaobaoGoodsComponent } from './view/taobao-goods/taobao-goods.component
 import { TutorialComponent } from './view/tutorial/tutorial.component';
 import { TutorialDetailComponent } from './view/tutorial-detail/tutorial-detail.component';
 import { WaComponent } from './view/wa/wa.component';
+import {MatCardModule} from "@angular/material/card";
+import { NormalQuestionsComponent } from './view/normal-questions/normal-questions.component';
 
 @NgModule({
   declarations: [
@@ -33,15 +35,17 @@ import { WaComponent } from './view/wa/wa.component';
     TutorialComponent,
     TutorialDetailComponent,
     WaComponent,
+    NormalQuestionsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    NgZorroAntdMobileModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        NgZorroAntdMobileModule,
+        MatCardModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

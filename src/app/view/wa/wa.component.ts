@@ -25,7 +25,7 @@ export class WaComponent implements OnInit {
 
   code?: string;
   customerId?: string;
-  appid: string = "wxf965489b2b9d401d";
+  appid?: string = "wx9df689926d70eabb";
   parent: Customer = {
 
   };

@@ -9,6 +9,7 @@ import {TaobaoGoodsComponent} from "./view/taobao-goods/taobao-goods.component";
 import {TutorialComponent} from "./view/tutorial/tutorial.component";
 import {TutorialDetailComponent} from "./view/tutorial-detail/tutorial-detail.component";
 import {WaComponent} from "./view/wa/wa.component";
+import {NormalQuestionsComponent} from "./view/normal-questions/normal-questions.component";
 
 const routes: Routes = [
   { path: 'system-activities/activities-domain', component: ActivitiesDomainComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'taobao-goods', component: TaobaoGoodsComponent },
   { path: 'tutorial', component: TutorialComponent },
   { path: 'tutorial-detail', component: TutorialDetailComponent },
+  { path: 'normal-questions', component: NormalQuestionsComponent },
 ];
 
 @NgModule({

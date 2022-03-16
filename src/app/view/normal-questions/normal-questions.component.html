@@ -1,0 +1,30 @@
+<List *ngFor="let qa of qas" [renderHeader]="qa.title" >
+  <Accordion [accordion]="true" (onChange)="onChange($event)">
+    <AccordionPanel
+      *ngFor="let akagi of qa.accordions; let i = index"
+      [key]="i + ''"
+      [header]="akagi.title"
+      [disabled]="akagi.open"
+    >
+      <List className="my-list">
+        <ListItem *ngFor="let content of akagi.child" multipleLine="true" wrap="false">
+          {{ content }}
+        </ListItem>
+      </List>
+    </AccordionPanel>
+  </Accordion>
+</List>
+<ng-template #title1>
+  <div>
+    【大家注意】购买时请注意以下几点，90%会得不到佣金哦
+    ❶领券后加入购物车或收藏之后购买
+    ❷使用集分宝、红包以及其他第三方优惠
+    ❸领券后拍了店铺的其他商品有可能会没有佣金
+    ❹咨询店家时 通过淘宝客服发的商品链接下单
+    ❺使用手机淘宝以外的任何手机APP下单
+
+    正确的下单方式：
+    （1）复制淘宝或京东、拼多多口令或链接后打开外卖省多多App点击“购买返”→App自动唤起淘宝→领券→立即下单。
+    （2）在外卖省多多App搜索选择商品→点击“购买返”→自动唤起淘宝App领劵→立即下单。
+  </div>
+</ng-template>
