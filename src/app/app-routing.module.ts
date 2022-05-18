@@ -10,6 +10,8 @@ import {TutorialComponent} from "./view/tutorial/tutorial.component";
 import {TutorialDetailComponent} from "./view/tutorial-detail/tutorial-detail.component";
 import {WaComponent} from "./view/wa/wa.component";
 import {NormalQuestionsComponent} from "./view/normal-questions/normal-questions.component";
+import {BaseActivityComponent} from "./view/base-activity/base-activity.component";
+import {MultipleButtonActivityComponent} from "./view/multiple-button-activity/multiple-button-activity.component";
 
 const routes: Routes = [
   { path: 'system-activities/activities-domain', component: ActivitiesDomainComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'tutorial', component: TutorialComponent },
   { path: 'tutorial-detail', component: TutorialDetailComponent },
   { path: 'normal-questions', component: NormalQuestionsComponent },
+  { path: 'base-activity', component: BaseActivityComponent },
+  { path: 'multiple-button-activity', component: MultipleButtonActivityComponent },
 ];
 
 @NgModule({

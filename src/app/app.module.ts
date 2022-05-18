@@ -20,6 +20,8 @@ import { TutorialDetailComponent } from './view/tutorial-detail/tutorial-detail.
 import { WaComponent } from './view/wa/wa.component';
 import {MatCardModule} from "@angular/material/card";
 import { NormalQuestionsComponent } from './view/normal-questions/normal-questions.component';
+import { BaseActivityComponent } from './view/base-activity/base-activity.component';
+import { MultipleButtonActivityComponent } from './view/multiple-button-activity/multiple-button-activity.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { NormalQuestionsComponent } from './view/normal-questions/normal-questio
     TutorialDetailComponent,
     WaComponent,
     NormalQuestionsComponent,
+    BaseActivityComponent,
+    MultipleButtonActivityComponent,
   ],
     imports: [
         BrowserModule,
