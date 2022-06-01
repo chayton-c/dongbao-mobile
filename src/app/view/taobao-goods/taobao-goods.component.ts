@@ -1,13 +1,12 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Goods} from "../../pojo/goods/goods";
 import {ActionSheetService, ModalService, ToastService} from "ng-zorro-antd-mobile";
 import {HttpClient} from "@angular/common/http";
+import {Platform} from "@angular/cdk/platform";
 import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ViewportScroller} from "@angular/common";
 import {HttpUtils} from "../../util/http/http-util";
-import {Goods} from "../../pojo/goods/goods";
-import { Platform } from '@angular/cdk/platform';
-
 
 @Component({
   selector: 'app-taobao-goods',
@@ -73,7 +72,7 @@ export class TaobaoGoodsComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(selBox);
     this.copied = true;
-    setTimeout(() => this.copied = false, 5000)
+    setTimeout(() => this.copied = false, 2000)
   }
 
   jump2AuthPage() {

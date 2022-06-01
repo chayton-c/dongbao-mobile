@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Goods} from "../../pojo/goods/goods";
+import {Platform} from "../../pojo/platform";
 import {ActionSheetService, ModalService, ToastService} from "ng-zorro-antd-mobile";
+import {HttpClient} from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ViewportScroller} from "@angular/common";
-import {Goods} from "../../pojo/goods/goods";
 import {HttpUtils} from "../../util/http/http-util";
-import {Platform} from "../../pojo/platform";
 
 @Component({
   selector: 'app-taobao-test',

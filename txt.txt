@@ -2,3 +2,4 @@ ng serve --proxy-config=proxy.conf.json --host=0.0.0.0 --port=8006 --disable-hos
 node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --prod
 ng build --prod
 ng g c view/taobao-goods
+ng g module view/custom-html-page --route custom-html-page --module app.module

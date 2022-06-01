@@ -1,0 +1,115 @@
+<div class="my-overlay" *ngIf="loading">
+  <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+</div>
+
+<div
+  [style.background-image]="'url(' + customHtml.backgroundUrl + ')'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-color]="customHtml.mainColor ? customHtml.mainColor : '#ffffff'"
+  [style.background-size]="'100% auto'"
+>
+  <!--  <div style="margin-top: 50px;background-color: rgba(0, 0, 0, 0)" id="mark">-->
+  <!--  </div>-->
+  <div style="height: 25px"></div>
+
+  <div *ngFor="let customHtmlLayout of customHtml.customHtmlLayouts;let i = index">
+    <div [ngSwitch]="customHtmlLayout.layoutType!">
+
+      <div style="height: 10px"></div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.SHELL" [style.height]="windowWidth * customHtmlLayout.layoutHeight + 'px'">
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.TOP_NAVIGATION_BARS" class="header">
+        <div class="header-bars-left-arrow" (click)="backPreviousPage()">
+          <img src="http://shenghenduooss.gohong.com/icons/left-arrow.png" style="height: 25px" alt="">
+        </div>
+        <div class="header-bars" [style]="'background-color: ' + customHtml.secondaryColor">
+          <div *ngFor="let customHtmlComponent of customHtmlLayout.customHtmlComponents" (click)="parseComponent(customHtmlComponent)">
+            <div *ngIf="customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_1" class="header-bars-active-item"
+                 [style.width]="(100 / customHtmlLayout.customHtmlComponents.length) + '%'">
+              <span [style]="'color: ' + customHtml.mainColor">{{customHtmlComponent.mainText}}</span>
+            </div>
+            <div *ngIf="customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_2" class="header-bars-normal-item"
+                 [style.width]="(100 / customHtmlLayout.customHtmlComponents.length) + '%'">
+              <span>{{customHtmlComponent.mainText}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.MAIN_BUTTON" class="main-button"
+           (click)="parseComponent(customHtmlLayout.customHtmlComponents[0]!)"
+           [style]="'color: ' + customHtml.mainColor"
+      >
+        {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
+        <img src="http://shenghenduooss.gohong.com/icons/orange-right-arrow-background.png" style="color: rgba(205,102,26, 1)" alt="">
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.BUTTON_LIST" class="button-list">
+        <div *ngFor="let customHtmlComponent of customHtmlLayout.customHtmlComponents">
+          <div class="button-list-item" [style]="'background-color: ' + customHtml.secondaryColor">
+            <div class="button-list-item-greenhand-icon"
+                 *ngIf="
+                       customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_2 ||
+                        customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_4">
+              <img src="http://shenghenduooss.gohong.com/icons/green-hand.png" alt="">
+            </div>
+
+            <div
+              (click)="parseComponent(customHtmlComponent)"
+              *ngIf="(customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_1
+                            || customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_2)"
+              [style]="'background-color: ' + customHtml.mainColor"
+              class="button-list-item-left"
+            >
+              {{customHtmlComponent.mainText}} ＞
+            </div>
+
+            <div
+              (click)="parseComponent(customHtmlComponent)"
+              *ngIf="(customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_3
+                            || customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_4)"
+              [style]="'color: ' + customHtml.mainColor"
+              class="button-list-item-left-active"
+            >
+              {{customHtmlComponent.mainText}} ＞
+            </div>
+
+            <div
+              (click)="parseComponent(customHtmlComponent, true)"
+              class="button-list-item-right"
+              [style]="'background-color: ' + customHtml.secondaryColor">
+              <img src="http://shenghenduooss.gohong.com/upload/2022-05-27/1c37cded-05d4-4ee4-900b-77b48398a86e-temporary6555991821404602717.png" alt="">
+              <span [style]="'color: ' + customHtml.mainColor">分享海报</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.SECONDARY_BUTTON" class="sub-button"
+           (click)="parseComponent(customHtmlLayout.customHtmlComponents[0]!)"
+           [style]="'background-color: ' + customHtml.mainColor"
+      >
+        {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.DESCRIPTIONS" class="description">
+        <h3 style="color: #FCE8E3;" (click)="parseComponent(customHtmlLayout.customHtmlComponents[0]!)">
+          {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
+        </h3>
+        <div style="white-space: pre-line;" (click)="copyText(customHtmlLayout.customHtmlComponents[0]!.subText)">
+          {{customHtmlLayout.customHtmlComponents[0]!.subText}}
+        </div>
+      </div>
+
+      <div *ngSwitchCase="customHtmlLayoutConstant.SHARE_PASSWORD_AND_BUTTON"></div>
+
+    </div>
+  </div>
+
+  <div style="height: 100px">
+  </div>
+
+</div>
