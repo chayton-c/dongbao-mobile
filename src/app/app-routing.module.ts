@@ -10,10 +10,13 @@ const routes: Routes = [
   { path: 'taobao-test', loadChildren: () => import('./view/taobao-test/taobao-test.module').then(m => m.TaobaoTestModule) },
   { path: 'normal-questions', loadChildren: () => import('./view/normal-questions/normal-questions.module').then(m => m.NormalQuestionsModule) },
   { path: 'multiple-button-activity', loadChildren: () => import('./view/custom-html-page/custom-html-page.module').then(m => m.CustomHtmlPageModule) },
+  { path: 'vip-level', loadChildren: () => import('./view/vip-level/vip-level.module').then(m => m.VipLevelModule) },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

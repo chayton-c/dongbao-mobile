@@ -22,7 +22,7 @@
 
       <div *ngSwitchCase="customHtmlLayoutConstant.TOP_NAVIGATION_BARS" class="header">
         <div class="header-bars-left-arrow" (click)="backPreviousPage()">
-          <img src="http://shenghenduooss.gohong.com/icons/left-arrow.png" style="height: 25px" alt="">
+          <img src="http://shenghenduooss.gohong.com/icons/left-arrow.png" style="height: 20px;position: relative;top: 5px;" alt="">
         </div>
         <div class="header-bars" [style]="'background-color: ' + customHtml.secondaryColor">
           <div *ngFor="let customHtmlComponent of customHtmlLayout.customHtmlComponents" (click)="parseComponent(customHtmlComponent)">
@@ -43,7 +43,8 @@
            [style]="'color: ' + customHtml.mainColor"
       >
         {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
-        <img src="http://shenghenduooss.gohong.com/icons/orange-right-arrow-background.png" style="color: rgba(205,102,26, 1)" alt="">
+        <img src="http://shenghenduooss.gohong.com/icons/orange-right-arrow-background.png" style="color: rgba(205,102,26, 1);"
+             alt="">
       </div>
 
       <div *ngSwitchCase="customHtmlLayoutConstant.BUTTON_LIST" class="button-list">
@@ -104,7 +105,21 @@
         </div>
       </div>
 
-      <div *ngSwitchCase="customHtmlLayoutConstant.SHARE_PASSWORD_AND_BUTTON"></div>
+      <div *ngSwitchCase="customHtmlLayoutConstant.SHARE_PASSWORD_AND_BUTTON" class="share-password-and-button">
+        <div class="share-password-and-button-password">
+          {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
+        </div>
+        <div
+          (click)="copyText(customHtmlLayout.customHtmlComponents[0]!.mainText)"
+          [style]="'background-color: ' + customHtml.mainColor"
+          class="share-password-and-button-copy-button">
+          复制口令
+        </div>
+        <div class="share-password-and-button-description"
+             [style.color]="customHtml.mainColor">
+          {{customHtmlLayout.customHtmlComponents[0]!.subText}}
+        </div>
+      </div>
 
     </div>
   </div>

@@ -15,7 +15,7 @@ import {HttpUtils} from "../../util/http/http-util";
 })
 export class TaobaoGoodsComponent implements OnInit {
 
-  encryptCustomerId: string = "";
+  customerId: string = "";
   title: string = "";
   shopName: string = "";
   goodsId: string = "";
@@ -35,11 +35,8 @@ export class TaobaoGoodsComponent implements OnInit {
     public router: Router,
     private viewportScroller: ViewportScroller,
     private activatedRoute: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((queryParams) => {
-      if (queryParams.encryptCustomerId) this.encryptCustomerId = queryParams.encryptCustomerId;
+      if (queryParams.customerId) this.customerId = queryParams.customerId;
       if (queryParams.title) this.title = queryParams.title;
       if (queryParams.shopName) this.shopName = queryParams.shopName;
       if (queryParams.goodsId) this.goodsId = queryParams.goodsId;
@@ -48,7 +45,7 @@ export class TaobaoGoodsComponent implements OnInit {
     let params = {
       title: this.title,
       shopName: this.shopName,
-      encryptCustomerId: this.encryptCustomerId,
+      customerId: this.customerId,
       goodsId: this.goodsId,
       platform: 2
     }
@@ -57,6 +54,9 @@ export class TaobaoGoodsComponent implements OnInit {
       this.goods = res.goods;
       this.cdr.detectChanges();
     });
+  }
+
+  ngOnInit(): void {
   }
 
   copyInputMessage(val: string) {
@@ -76,7 +76,7 @@ export class TaobaoGoodsComponent implements OnInit {
   }
 
   jump2AuthPage() {
-    window.location.href = "http://server.bogufangzhou.com/auth/wechat-auth";
+    window.location.href = "http://duoduo.saoyouli.com/wa?e=" + this.customerId;
   }
 
 

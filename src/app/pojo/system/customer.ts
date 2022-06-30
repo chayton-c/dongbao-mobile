@@ -1,6 +1,6 @@
 export class Customer {
 
-  id?: bigint;
+  id?: string;
   gender?: number; // 用户性别
   parentCustomerId?: number; // 上级用户id
   agentCustomerId?: number; // 代理用户id
@@ -20,6 +20,7 @@ export class Customer {
   slaveCount?: number; // 下级数量
   maximumSlave?: number; // 下级最大数量
   agentType?: number; // 代理类型
+  level1Vip?: number;
   defaultInviteCode?: string; // 尽管用户二维码有多个，这里显示默认的
   qrcodeUrl?: string; // 用户邀请二维码url
   loginTime?: Date; // 登录时间

@@ -24,9 +24,13 @@ export class CustomHtmlPageComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.id) this.id = queryParams.id;
       if (queryParams.customerId) this.customerId = queryParams.customerId;
+      if (queryParams.android) this.android = queryParams.android;
+      if (queryParams.ios) this.ios = queryParams.ios;
+
       this.loadDataFromServer();
     });
   }
+
 
   loading = false;
   customHtml: CustomHtml = {
@@ -48,13 +52,15 @@ export class CustomHtmlPageComponent implements OnInit {
   style: string = "";
   windowWidth = window.innerWidth;
   customerId: string = "";
+  android: number = 0;
+  ios: number = 0;
   id: string = "";
 
   ngOnInit(): void {
   }
 
   loadDataFromServer(): void {
-    this.loading = true;
+    // this.loading = true;
     let params = {
       id: this.id,
       customerId: this.customerId
@@ -92,17 +98,25 @@ export class CustomHtmlPageComponent implements OnInit {
       text: text, copyBeforeAction: text,
     }
     let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
-    console.log("copytext")
-    console.log(s)
-    // @ts-ignore
-    window.webkit.messageHandlers.copytext.postMessage(s);
+
+    if (this.android) {
+      // @ts-ignore
+      window.Android.copyText(s);
+    } else {
+      // @ts-ignore
+      window.webkit.messageHandlers.copyText.postMessage(s);
+    }
     return;
   }
 
   backPreviousPage(): void {
-    console.log("backPreviousPage")
-    // @ts-ignore
-    window.webkit.messageHandlers.backPreviousPage.postMessage('');
+    if (this.android) {
+      // @ts-ignore
+      window.Android.backPreviousPage('');
+    } else {
+      // @ts-ignore
+      window.webkit.messageHandlers.backPreviousPage.postMessage('');
+    }
     return;
   }
 
@@ -110,13 +124,17 @@ export class CustomHtmlPageComponent implements OnInit {
     let operationType = customHtmlComponent.operationType;
 
     let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
-    console.log(s);
-
 
     if (operationType == this.customHtmlComponentConstant.BACK_PREVIOUS_PAGE) {
       console.log("backPreviousPage")
-      // @ts-ignore
-      window.webkit.messageHandlers.backPreviousPage.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.backPreviousPage('');
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.backPreviousPage.postMessage(s);
+      }
       return;
     }
 
@@ -126,20 +144,39 @@ export class CustomHtmlPageComponent implements OnInit {
     }
     if (operationType == this.customHtmlComponentConstant.TAOBAO_CONVERT) {
       console.log("taobaoScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.taobaoScheme.postMessage(s);
+
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.taobaoScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.taobaoScheme.postMessage(s);
+      }
       return;
     }
     if (operationType == this.customHtmlComponentConstant.JINGDONG_CONVERT) {
       console.log("jingdongScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.jingdongScheme.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.jingdongScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.jingdongScheme.postMessage(s);
+      }
       return;
     }
     if (operationType == this.customHtmlComponentConstant.PINDUODUO_CONVERT) {
       console.log("pinduoduoScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.pinduoduoScheme.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.pinduoduoScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.pinduoduoScheme.postMessage(s);
+      }
       return;
     }
     if (
@@ -147,15 +184,27 @@ export class CustomHtmlPageComponent implements OnInit {
       || operationType == this.customHtmlComponentConstant.AMAP_CONVERT
     ) {
       console.log("elemeScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.elemeScheme.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.elemeScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.elemeScheme.postMessage(s);
+      }
       return;
     }
 
     if (operationType == this.customHtmlComponentConstant.MEITUAN_CONVERT) {
       console.log("meituanScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.meituanScheme.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.meituanScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.meituanScheme.postMessage(s);
+      }
       return;
     }
     if (
@@ -165,14 +214,26 @@ export class CustomHtmlPageComponent implements OnInit {
       || operationType == this.customHtmlComponentConstant.ELEME_SHARE
       || operationType == this.customHtmlComponentConstant.AMAP_SHARE) {
       console.log("takeoutShare")
-      // @ts-ignore
-      window.webkit.messageHandlers.takeoutShare.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.takeoutShare(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.takeoutShare.postMessage(s);
+      }
       return;
     }
     if (operationType == this.customHtmlComponentConstant.MEITUAN_YOUXUAN_CONVERT) {
       console.log("meituanScheme")
-      // @ts-ignore
-      window.webkit.messageHandlers.meituanScheme.postMessage(s);
+
+      if (this.android) {
+        // @ts-ignore
+        window.Android.meituanScheme(s);
+      } else {
+        // @ts-ignore
+        window.webkit.messageHandlers.meituanScheme.postMessage(s);
+      }
       return;
     }
     if (operationType == this.customHtmlComponentConstant.REDIRECT_TO_H5) {

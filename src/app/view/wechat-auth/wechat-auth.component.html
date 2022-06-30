@@ -1,7 +1,12 @@
+<div class="my-overlay" *ngIf="showShadow">
+  <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/constant/jump2chrome.png" style="width: 50%;position: absolute;top: 2%;right: 8%">
+</div>
+
 <img style="width: 100%"
-     src="http://shenghenduooss.gohong.com/upload/%E9%82%80%E8%AF%B7%E9%A1%B5/invite_base.png"
-     alt="">
-<div style="position: absolute;top: 14.5%;left: 3%;">
+     src="http://shenghenduooss.gohong.com/constant/invite-base.png"
+     alt="" (click)="jump2download()">
+<div style="position: absolute;top: 2%;left: 5%;">
   <img style="height: 50px;width: 50px;float: left;border-radius: 50%;margin-right: 10px"
        [src]="parent.avatar"
        alt="">
@@ -9,4 +14,8 @@
     <div>你的好友</div>
     <div>{{ parent.displayName }}</div>
   </div>
+</div>
+
+<div (click)="jump2download()" style="height: 10%;width: 80%;position: absolute;top: 80%;left: 10%">
+
 </div>

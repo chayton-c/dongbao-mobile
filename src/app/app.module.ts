@@ -18,7 +18,7 @@ import {MatCardModule} from "@angular/material/card";
     TutorialComponent,
   ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,

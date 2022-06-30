@@ -1,0 +1,215 @@
+<div style="height: 40px"></div>
+
+<div class="header">
+  <div class="header-bars-left-arrow" (click)="backPreviousPage()">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/left-arrow.png" style="height: 20px;position: relative;top: 5px;" alt="">
+  </div>
+  <div class="header-content">会员权益</div>
+</div>
+
+<div
+  class="card"
+  [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/raw-card.png)'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'100% auto'">
+
+  <img *ngIf="level1VipPurchasePage" class="level1-vip-card-icon" src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/level1-vip-icon.png" alt=""/>
+  <img *ngIf="agentPurchasePage" class="level1-vip-card-icon" src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/agent-icon.png" alt=""/>
+
+  <div>
+    <!-- 占位 -->
+    <div style="width: 4vw;float: left;height: 1vw"></div>
+    <div class="current-commission" *ngIf="customer.totalIncome! > 100">
+      <div class="commission-type">
+        当前已省
+      </div>
+      <div class="commission-value">
+        <span style="color: #FCDFBB;width: 12vw;font-size: 20px;">{{ math.floor(customer.totalIncome!) }}.</span>
+        <span style="color: #FCDFBB;width: 12vw">{{ math.floor(customer.totalIncome! * 100) % 100 }}</span>
+      </div>
+    </div>
+
+    <div class="vip-commission" *ngIf="customer.totalIncome! > 100">
+      <div class="commission-type">
+        开通后可多省
+      </div>
+      <div class="commission-value">
+        <span style="color: #FCDFBB;width: 12vw;font-size: 20px;">{{ math.floor(customer.totalIncome! * commissionGrowthRate) }}.</span>
+        <span style="color: #FCDFBB;width: 12vw">{{ math.floor(customer.totalIncome! * commissionGrowthRate * 100) % 100 }}</span>
+      </div>
+    </div>
+
+    <div class="vip-commission" *ngIf="customer.totalIncome! <= 100">
+      <div class="commission-type">
+        预计每年可省
+      </div>
+      <div class="commission-value">
+        <span style="color: #FCDFBB;width: 12vw;font-size: 20px;">4460</span>
+      </div>
+    </div>
+
+    <div class="card-info">
+      <div *ngIf="customer.id && level1VipPurchasePage">
+        <img *ngIf="!customer.level1Vip" src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/199peryear.png" alt=""/>
+        <img *ngIf="!customer.level1Vip"
+             (click)="jump2VipPayment()"
+             src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/jump2payment.png" alt=""/>
+      </div>
+      <div *ngIf="customer.id && agentPurchasePage">
+        <img *ngIf="!customer.agentType" src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/999peryear.png" alt=""/>
+        <img *ngIf="!customer.agentType"
+             (click)="jump2VipPayment()"
+             src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/jump2payment.png" alt=""/>
+      </div>
+
+      <div *ngIf="(customer.level1Vip && level1VipPurchasePage) || (customer.agentType && agentPurchasePage)">
+        <div class="renewal" (click)="jump2VipPayment()">
+          续费
+        </div>
+        <div class="date" *ngIf="customerVipLevel.agentExpireDate">
+          {{(customerVipLevel.agentExpireDate | date: 'yyyy-MM-dd')}}到期
+        </div>
+        <div class="date" *ngIf="customerVipLevel.level1VipExpireDate && !customer.agentType">
+          {{(customerVipLevel.level1VipExpireDate | date: 'yyyy-MM-dd')}}到期
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="redeem-gift-cards">
+  <input placeholder="卡密兑换"/>
+  <div>
+    兑换
+  </div>
+</div>
+
+<div class="deviding-line">
+  <img src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/deviding-line.png" alt=""/>
+</div>
+
+<nzm-card class="rights-and-interests">
+  <div class="rights-and-interests-title">
+    <div class="rights-and-interests-title-icon">权益1</div>
+    <div class="rights-and-interests-title-content">红包升级￥6-11元大额商家</div>
+    <div class="rights-and-interests-title-label">&nbsp;&nbsp;价值20元&nbsp;</div>
+  </div>
+  <div class="eleme-coupons"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/eleme-coupons.png)'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+    <div style="margin-left: 4vw;height: 20vw;line-height: 20vw;color: #F7233D;font-weight: bold">
+      <span style="font-size: 30px">5</span>
+      <span style="font-size: 18px;">&nbsp;元</span>
+      <span>&nbsp;&nbsp;X&nbsp;&nbsp;</span>
+      <span style="font-size: 30px">4</span>
+      <span style="font-size: 18px">&nbsp;张</span>
+    </div>
+  </div>
+</nzm-card>
+
+<nzm-card class="rights-and-interests">
+  <div class="rights-and-interests-title">
+    <div class="rights-and-interests-title-icon">权益2</div>
+    <div class="rights-and-interests-title-content">再领200元天猫券</div>
+    <div class="rights-and-interests-title-label">&nbsp;&nbsp;价值200元&nbsp;</div>
+  </div>
+  <div class="tmall-coupons">
+    <div class="tmall-coupon" style="margin-left: 0"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/tmall-coupon1.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+      <div class="tmall-coupon-name">休闲食品</div>
+      <div class="tmall-coupon-amount">
+        199<span style="font-size: 4vw;">减</span>100
+      </div>
+    </div>
+    <div class="tmall-coupon"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/tmall-coupon2.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+      <div class="tmall-coupon-name">休闲食品</div>
+      <div class="tmall-coupon-amount">
+        199<span style="font-size: 4vw;">减</span>100
+      </div>
+    </div>
+    <div class="tmall-coupon"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/tmall-coupon3.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+      <div class="tmall-coupon-name">休闲食品</div>
+      <div class="tmall-coupon-amount">
+        199<span style="font-size: 4vw;">减</span>100
+      </div>
+    </div>
+  </div>
+</nzm-card>
+
+<nzm-card class="rights-and-interests" (click)="jump2GoldcoinsActivityFrontpage()">
+  <div class="rights-and-interests-title">
+    <div class="rights-and-interests-title-icon">权益3</div>
+    <div class="rights-and-interests-title-content">超级会员红包10元</div>
+    <div class="rights-and-interests-title-label">&nbsp;&nbsp;价值10元&nbsp;</div>
+  </div>
+  <div class="level1-vip-red-envelope"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/level1-vip-red-envelope.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+</nzm-card>
+
+<nzm-card class="rights-and-interests">
+  <div class="rights-and-interests-title">
+    <span style="margin-left: 2vw;font-weight: bolder">更多权益</span>
+  </div>
+
+  <div class="more-rights-and-interests-list">
+    <div class="more-rights-and-interests" style="margin-left: 0"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/rights-and-interests1.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+    </div>
+    <div class="more-rights-and-interests"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/rights-and-interests2.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+    </div>
+    <div class="more-rights-and-interests"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/rights-and-interests3.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'27.5vw auto'">
+    </div>
+  </div>
+</nzm-card>
+
+<div class="rights-and-interests">
+  <div class="rights-and-interests-title">
+    <span style="margin-left: 2vw;font-weight: bolder">专属特权</span>
+  </div>
+
+  <div>
+    <div class="vip-privilege"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/privilege/send-mail-privilege.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'44vw auto'">
+    </div>
+    <div class="vip-privilege"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/privilege/kfc-privilege.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'44vw auto'">
+    </div>
+    <div class="vip-privilege"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/privilege/starbucks-privilege.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'44vw auto'">
+    </div>
+    <div class="vip-privilege"
+         [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/privilege/pizza-hut-privilege.png)'"
+         [style.background-repeat]="'no-repeat'"
+         [style.background-size]="'44vw auto'">
+    </div>
+  </div>
+</div>
+
+<div style="height: 200px">
+</div>
