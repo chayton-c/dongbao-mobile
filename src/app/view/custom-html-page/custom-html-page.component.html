@@ -8,8 +8,6 @@
   [style.background-color]="customHtml.mainColor ? customHtml.mainColor : '#ffffff'"
   [style.background-size]="'100% auto'"
 >
-  <!--  <div style="margin-top: 50px;background-color: rgba(0, 0, 0, 0)" id="mark">-->
-  <!--  </div>-->
   <div style="height: 25px"></div>
 
   <div *ngFor="let customHtmlLayout of customHtml.customHtmlLayouts;let i = index">
@@ -21,10 +19,10 @@
       </div>
 
       <div *ngSwitchCase="customHtmlLayoutConstant.TOP_NAVIGATION_BARS" class="header">
-        <div class="header-bars-left-arrow" (click)="backPreviousPage()">
+        <div class="header-bars-left-arrow" (click)="WebkitUtils.backPreviousPage(android)">
           <img src="http://shenghenduooss.gohong.com/icons/left-arrow.png" style="height: 20px;position: relative;top: 5px;" alt="">
         </div>
-        <div class="header-bars" [style]="'background-color: ' + customHtml.secondaryColor">
+        <div class="header-bars" [style]="'background-color: ' + customHtml.secondaryColor" *ngIf="customHtmlLayout.customHtmlComponents.length > 0">
           <div *ngFor="let customHtmlComponent of customHtmlLayout.customHtmlComponents" (click)="parseComponent(customHtmlComponent)">
             <div *ngIf="customHtmlComponent.componentType == customHtmlComponentConstant.COMPONENT_TYPE_1" class="header-bars-active-item"
                  [style.width]="(100 / customHtmlLayout.customHtmlComponents.length) + '%'">
@@ -100,7 +98,7 @@
         <h3 style="color: #FCE8E3;" (click)="parseComponent(customHtmlLayout.customHtmlComponents[0]!)">
           {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
         </h3>
-        <div style="white-space: pre-line;" (click)="copyText(customHtmlLayout.customHtmlComponents[0]!.subText)">
+        <div style="white-space: pre-line;" (click)="WebkitUtils.copyText(customHtmlLayout.customHtmlComponents[0]!.subText, android)">
           {{customHtmlLayout.customHtmlComponents[0]!.subText}}
         </div>
       </div>
@@ -110,7 +108,7 @@
           {{customHtmlLayout.customHtmlComponents[0]!.mainText}}
         </div>
         <div
-          (click)="copyText(customHtmlLayout.customHtmlComponents[0]!.mainText)"
+          (click)="WebkitUtils.copyText(customHtmlLayout.customHtmlComponents[0]!.mainText, android)"
           [style]="'background-color: ' + customHtml.mainColor"
           class="share-password-and-button-copy-button">
           复制口令

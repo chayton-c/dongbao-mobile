@@ -32,7 +32,13 @@ export class CustomHtmlComponentConstant {
   public readonly AMAP_CONVERT = 10; // 高德转链
   public readonly AMAP_SHARE = 11; // 高德分享
   public readonly REDIRECT_TO_H5 = 12; // 跳转h5
-  public readonly CHANGE_CUSTOM_HTML_ID = 13; // 更换页面id
+  public readonly NAVIGATE_TO_OHTER_PAGE = 13; // 更换页面id
+  public readonly JUTUIKE_CONVERT = 14; // 聚推客转链
+  public readonly JUTUIKE_SHARE = 15; // 聚推客分享
+  public readonly JUTUIKE_VIP_CARD_CONVERT = 16; // 聚推客会员卡转链
+  public readonly JUTUIKE_H5_CONVERT = 17; // 聚推客h5转链
+  public readonly JUTUIKE_H5_SHARE = 18; // 聚推客h5分享
+
 
   // componentType
   public readonly COMPONENT_TYPE_1 = 1;

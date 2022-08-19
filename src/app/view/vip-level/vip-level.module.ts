@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { VipLevelRoutingModule } from './vip-level-routing.module';
 import { VipLevelComponent } from './vip-level.component';
-import {CardModule} from "ng-zorro-antd-mobile";
+import {CardModule, NgZorroAntdMobileModule} from "ng-zorro-antd-mobile";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import {CardModule} from "ng-zorro-antd-mobile";
   imports: [
     CommonModule,
     VipLevelRoutingModule,
-    CardModule
+    CardModule,
+    NgZorroAntdMobileModule,
+    FormsModule,
   ]
 })
 export class VipLevelModule { }

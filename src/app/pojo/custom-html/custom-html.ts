@@ -7,7 +7,6 @@ export interface CustomHtml {
   backgroundUrl: string; // 背景
   mainColor: string; // 主色
   secondaryColor: string; // 辅助色
-  // #
   focusColor: string; // 聚焦色
   remark: string;
   authType: number; // 授权类型

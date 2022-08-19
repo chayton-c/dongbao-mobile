@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'normal-questions', loadChildren: () => import('./view/normal-questions/normal-questions.module').then(m => m.NormalQuestionsModule) },
   { path: 'multiple-button-activity', loadChildren: () => import('./view/custom-html-page/custom-html-page.module').then(m => m.CustomHtmlPageModule) },
   { path: 'vip-level', loadChildren: () => import('./view/vip-level/vip-level.module').then(m => m.VipLevelModule) },
+  { path: 'vip-level-upgrade-card', loadChildren: () => import('./view/vip-level-upgrade-card/vip-level-upgrade-card.module').then(m => m.VipLevelUpgradeCardModule) },
 ];
 
 @NgModule({

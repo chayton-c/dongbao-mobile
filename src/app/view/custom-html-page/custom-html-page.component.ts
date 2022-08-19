@@ -7,6 +7,7 @@ import {CustomHtmlLayoutConstant} from "../../pojo/custom-html/custom-html-layou
 import {CustomHtmlComponent, CustomHtmlComponentConstant} from "../../pojo/custom-html/custom-html-component";
 import {HttpUtils} from "../../util/http/http-util";
 import {ActivityLinkConvertInfo} from "../../pojo/activity-link-convert-info";
+import {WebkitUtil} from "../../util/webkit-util";
 
 @Component({
   selector: 'app-custom-html-page',
@@ -47,6 +48,7 @@ export class CustomHtmlPageComponent implements OnInit {
     udpateTime: new Date(),
     url: ""
   }
+  WebkitUtils = WebkitUtil;
   customHtmlLayoutConstant: CustomHtmlLayoutConstant = new CustomHtmlLayoutConstant();
   customHtmlComponentConstant: CustomHtmlComponentConstant = new CustomHtmlComponentConstant();
   style: string = "";
@@ -87,185 +89,24 @@ export class CustomHtmlPageComponent implements OnInit {
         // this._toast.fail("网络繁忙，请稍后再试!" + res.msg);
         return;
       }
+
       let activityLinkConvertInfo: ActivityLinkConvertInfo = res.activityLinkConvertInfo;
-      this.postMessage(customHtmlComponent, share, activityLinkConvertInfo);
+      let operationType = customHtmlComponent.operationType;
+      if (share)
+        operationType = this.customHtmlComponentConstant.ELEME_SHARE;
+
+      if (operationType == this.customHtmlComponentConstant.NAVIGATE_TO_OHTER_PAGE) {
+        this.id = WebkitUtil.getQueryVar('id', customHtmlComponent.functionalText);
+        this.loadDataFromServer();
+        return;
+      }
+
+      WebkitUtil.postMessage(operationType, activityLinkConvertInfo, this.android, {
+        router: this.router,
+        redirectUrl: customHtmlComponent.functionalText,
+        customerId: this.customerId
+      });
     });
-  }
-
-  copyText(text: string): void {
-    let activityLinkConvertInfo: ActivityLinkConvertInfo = {
-      shareBasePictureUrl: "", url: "", wxMiniprogramOriginalId: "", wxMiniprogramPath: "", wxMiniprogramQrcodeUrl: "",
-      text: text, copyBeforeAction: text,
-    }
-    let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
-
-    if (this.android) {
-      // @ts-ignore
-      window.Android.copyText(s);
-    } else {
-      // @ts-ignore
-      window.webkit.messageHandlers.copyText.postMessage(s);
-    }
-    return;
-  }
-
-  backPreviousPage(): void {
-    if (this.android) {
-      // @ts-ignore
-      window.Android.backPreviousPage('');
-    } else {
-      // @ts-ignore
-      window.webkit.messageHandlers.backPreviousPage.postMessage('');
-    }
-    return;
-  }
-
-  postMessage(customHtmlComponent: CustomHtmlComponent, share?: boolean, activityLinkConvertInfo?: ActivityLinkConvertInfo) {
-    let operationType = customHtmlComponent.operationType;
-
-    let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
-
-    if (operationType == this.customHtmlComponentConstant.BACK_PREVIOUS_PAGE) {
-      console.log("backPreviousPage")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.backPreviousPage('');
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.backPreviousPage.postMessage(s);
-      }
-      return;
-    }
-
-    if (operationType == this.customHtmlComponentConstant.DO_NOT_NEED_TO_CONVERT) {
-      console.log("DO_NOT_NEED_TO_CONVERT")
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.TAOBAO_CONVERT) {
-      console.log("taobaoScheme")
-
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.taobaoScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.taobaoScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.JINGDONG_CONVERT) {
-      console.log("jingdongScheme")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.jingdongScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.jingdongScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.PINDUODUO_CONVERT) {
-      console.log("pinduoduoScheme")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.pinduoduoScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.pinduoduoScheme.postMessage(s);
-      }
-      return;
-    }
-    if (
-      operationType == this.customHtmlComponentConstant.ELEME_CONVERT
-      || operationType == this.customHtmlComponentConstant.AMAP_CONVERT
-    ) {
-      console.log("elemeScheme")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.elemeScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.elemeScheme.postMessage(s);
-      }
-      return;
-    }
-
-    if (operationType == this.customHtmlComponentConstant.MEITUAN_CONVERT) {
-      console.log("meituanScheme")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.meituanScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.meituanScheme.postMessage(s);
-      }
-      return;
-    }
-    if (
-      share
-      || operationType == this.customHtmlComponentConstant.MEITUAN_SHARE
-      || operationType == this.customHtmlComponentConstant.MEITUAN_YOUXUAN_SHARE
-      || operationType == this.customHtmlComponentConstant.ELEME_SHARE
-      || operationType == this.customHtmlComponentConstant.AMAP_SHARE) {
-      console.log("takeoutShare")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.takeoutShare(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.takeoutShare.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.MEITUAN_YOUXUAN_CONVERT) {
-      console.log("meituanScheme")
-
-      if (this.android) {
-        // @ts-ignore
-        window.Android.meituanScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.meituanScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.REDIRECT_TO_H5) {
-      window.location.href = customHtmlComponent.functionalText;
-      return;
-    }
-    if (operationType == this.customHtmlComponentConstant.CHANGE_CUSTOM_HTML_ID) {
-      let id = this.getQueryVar('id', customHtmlComponent.functionalText);
-      this.id = id!;
-      console.log("id")
-      this.loadDataFromServer();
-      return;
-    }
-  }
-
-  akagi() {
-    // let s = this.activityTransferPageSchemeInfo ? JSON.stringify(this.activityTransferPageSchemeInfo) : "";
-  }
-
-  getQueryVar(varName: string, href: string): string {
-    // Grab and unescape the query string - appending an '&' keeps the RegExp simple
-    // for the sake of this example.
-    let queryStr = unescape(href) + '&';
-
-    // Dynamic replacement RegExp
-    let regex = new RegExp('.*?[&\\?]' + varName + '=(.*?)&.*');
-
-    // Apply RegExp to the query string
-    let val = queryStr.replace(regex, "$1");
-
-    // If the string is the same, we didn't find a match - return false
-    return val == queryStr ? '' : val;
   }
 
 }

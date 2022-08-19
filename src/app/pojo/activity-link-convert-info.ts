@@ -5,5 +5,6 @@ export interface ActivityLinkConvertInfo {
   shareBasePictureUrl: string;
   wxMiniprogramQrcodeUrl: string;
   copyBeforeAction: string;
-  text: string;
+  text?: string;
+  title?: string;
 }

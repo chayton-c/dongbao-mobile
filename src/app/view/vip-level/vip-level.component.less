@@ -1,64 +1,79 @@
 .header {
-  height: 50px;
-  margin: 10px auto;
-}
+  height: 60px;
+  background-color: white;
 
-.header-bars-left-arrow {
-  float: left;
-  height: 50px;
-  line-height: 50px;
-  margin: auto 2%;
-  width: 5vw;
-}
-.header-content {
-  width: 90vw;
-  text-align: center;
-  line-height: 50px;
-  font-size: 15px;
+  .header-bars-left-arrow {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    margin: auto 2%;
+    width: 5vw;
+  }
+
+  .header-content {
+    width: 90vw;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+  }
+
 }
 
 // 会员卡卡面
+.card-background {
+  width: 100vw;
+  background-color: white;
+}
+
 .card {
   height: 45vw;
   width: 90vw;
   margin-left: 5vw;
 }
+
 .level1-vip-card-icon { // 超级会员icon
   width: 26vw;
   margin-top: 5vw;
   margin-left: 5vw;
 }
+
 .current-commission {
   float: left;
   margin-left: 1vw;
   width: 24vw;
 }
+
 .vip-commission {
   float: left;
   margin-left: 1vw;
   width: 24vw;
 }
+
 .commission-type {
   margin-top: 11vw;
   color: #6D7081
 }
+
 .commission-value {
   margin-top: 3vw;
 }
+
 .card-info {
-  margin-left: 1vw;
   float: right;
   width: 36vw;
+
   img {
     margin-right: 6vw;
     margin-top: 5vw;
     width: 24vw;
   }
+
   .date {
     text-align: right;
     margin-right: 6vw;
     color: #828898;
   }
+
   .renewal {
     margin-top: 16vw;
     text-align: right;
@@ -67,42 +82,83 @@
   }
 }
 
-// 礼品卡兑换
-.redeem-gift-cards {
-  height: 45px;
-  background-color: #DDDFE9;
-  border-radius: 25px;
-  width: 86vw;
-  margin-left: 7vw;
-  text-align: center;
-  input {
-    line-height: 45px;
-    border: none;
+.functions {
+  background-color: white;
+  height: 20vw;
+  padding-left: 5vw;
+
+  .function {
     float: left;
-    background-color: #DDDFE9;
-    border-radius: 25px;
-    font-size: 14px;
-    margin-left: 5vw;
-    width: 55vw
+    width: 30vw;
+
+    .function-icon {
+      height: 10vw;
+
+      img {
+        position: relative;
+        left: 10vw;
+        height: 8vw;
+      }
+    }
+
+    .function-name {
+      text-align: center;
+    }
   }
-  div {
-    line-height: 35px;
+
+}
+
+.redeem-gift-cards {
+  height: 18vw;
+  width: 100vw;
+  background-color: white;
+  .card-no-input {
+    width: 90vw;
+    margin-left: 5vw;
+    background-color: #F6F6F6;
+    height: 12vw;
+    border-radius: 10vw;
+    svg {
+      float: left;
+      width: 5vw;
+      position: relative;
+      top: 2.2vw;
+      left: 3vw;
+    }
+    input {
+      float: left;
+      width: 80vw;
+      font-size: 3.5vw;
+      padding-left: 5vw;
+      height: 12vw;
+      line-height: 12vw;
+      background-color: #F6F6F6;
+      border: none;
+    }
+  }
+
+  .redeem-button {
+    position: relative;
+    top: -10.5vw;
+    left: 70vw;
     float: left;
-    background-color: #393C44;
-    margin: 5px 0 0 10vw;
-    color: #FEDBBD;
-    font-size: 14px;
-    letter-spacing: 2px;
-    border-radius: 25px;
-    width: 14vw
+    width: 22vw;
+    height: 9vw;
+    background-color: #20212B;
+    color: #FBD2B3;
+    font-size: 3.5vw;
+    line-height: 9vw;
+    text-align: center;
+    border-radius: 112vw;
   }
 }
 
-
 // 卡密权益分割线
 .deviding-line {
+  margin-top: 20px;
   height: 75px;
   text-align: center;
+
   img {
     width: 80vw;
     margin-top: 32px
@@ -156,6 +212,13 @@
   border-radius: 15px 0 0 15px;
 }
 
+.agent-rights {
+  width: 88vw;
+  margin-top: 10px;
+  margin-left: 2vw;
+  height: 35vw;
+}
+
 .eleme-coupons {
   height: 20vw;
   width: 88vw;
@@ -168,12 +231,14 @@
   margin-left: 2vw;
   margin-top: 10px;
 }
+
 .tmall-coupon {
   width: 27.5vw;
   height: 18vw;
   margin-left: 2.5vw;
   float: left;
 }
+
 .tmall-coupon-name {
   margin-top: 3.5vw;
   //margin-left: 8vw;
@@ -181,12 +246,14 @@
   color: #FEFDFD;
   font-size: 3vw;
 }
+
 .tmall-coupon-amount {
   text-align: center;
   margin-top: 2vw;
   color: #FEFDFD;
   font-size: 5vw;
 }
+
 .level1-vip-red-envelope {
   width: 88vw;
   margin-top: 10px;
@@ -195,16 +262,18 @@
 }
 
 .more-rights-and-interests-list {
-  height: 20vw;
+  height: 44vw;
   width: 88vw;
   margin-left: 2vw;
 }
+
 .more-rights-and-interests {
-  width: 27.5vw;
-  height: 23vw;
-  margin-left: 2.5vw;
+  width: 28.5vw;
+  height: 21vw;
+  margin-left: 1vw;
   float: left;
 }
+
 .vip-privilege {
   float: left;
   width: 44vw;

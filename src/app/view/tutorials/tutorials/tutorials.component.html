@@ -1,18 +1,69 @@
 
-<!--<button style="height: 40px;width: 40px" (click)="jump2detail()">跳转详情</button>-->
+<div *ngIf="underReview == 0">
+  <div style="width: 100%;" *ngIf="tutorialType == 'video'">
 
-<div style="width: 100%">
-  <div style="text-align: center;padding: 10% 0;">
-    <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/0.png" style="width: 80%" alt="">
+    <div style="position: absolute;left: 18vw;top: 6vw;height: 10vw;width: 32vw;" (click)="tutorialType = 'video'">
+    </div>
+    <div style="position: absolute;left: 51vw;top: 6vw;height: 10vw;width: 32vw;" (click)="tutorialType = 'image'">
+    </div>
+
+    <video (click)="startTakeoutVideo()"
+           style="position: absolute;top: 22vw;width: 96%;margin-left: 2%;"
+           #takeoutVideoPlayer [controls]="takeoutVideoPlaying"
+           preload="none"
+           poster="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/takeout-video.png">
+      <source (click)="startTakeoutVideo()" src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/takeout-tutorials.mp4" type="video/mp4">
+    </video>
+
+    <video (click)="startShoppingVideo()"
+           style="position: absolute;top: 80vw;width: 96%;margin-left: 2%;"
+           #shoppingVideoPlayer [controls]="shoppingVideoPlaying"
+           preload="none"
+           poster="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/shopping-video.png">
+      <source (click)="startShoppingVideo()" src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/shopping-tutorials.mp4" type="video/mp4">
+    </video>
+
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/video-tutorial-1.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/video-tutorial-2.png" class="content-image" alt="">
+
+    <!--  <button style="border: none;background: #47474B;color: #F5F5F5;width: 96%;margin: 2%;height: 50px;border-radius: 5px;font-size: 16px">查看更多规则</button>-->
   </div>
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/1.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/2.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/3.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/4.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/5.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/6.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/7.png" class="content-image" alt="">
-  <img src="http://shenghenduo.oss-cn-beijing.aliyuncs.com/upload/%E6%95%99%E7%A8%8B%E9%A1%B5%E9%9D%A2/8.png" class="content-image" alt="">
 
-  <!--  <button style="border: none;background: #47474B;color: #F5F5F5;width: 96%;margin: 2%;height: 50px;border-radius: 5px;font-size: 16px">查看更多规则</button>-->
+  <div style="width: 100%" *ngIf="tutorialType == 'image'">
+
+    <div style="position: absolute;left: 18vw;top: 6vw;height: 10vw;width: 32vw;" (click)="tutorialType = 'video'">
+    </div>
+    <div style="position: absolute;left: 51vw;top: 6vw;height: 10vw;width: 32vw;" (click)="tutorialType = 'image'">
+    </div>
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/image-tutorial-1.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/image-tutorial-2.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/image-tutorial-3.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/image-tutorial-4.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/image-tutorial-5.png" class="content-image" alt="">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/tutorials/video-tutorial-2.png" class="content-image" alt="">
+
+    <!--  <button style="border: none;background: #47474B;color: #F5F5F5;width: 96%;margin: 2%;height: 50px;border-radius: 5px;font-size: 16px">查看更多规则</button>-->
+  </div>
+</div>
+<div *ngIf="underReview == 1">
+  查找商品
+  如果您不知要如何挑选商品，建议您可以从分类开始，寻找适合您的商品。若您已知道您要找的东西，您可以直接利用搜索的方式，找到该样商品。
+  放入购物车
+  （1）当您选好商品后，在商品详情页点击“放入购物车”按钮，商品会自动添加到您的购物车中。此时，您还可以继续挑选商品，把想要购买的商品都放入购物车中，最后一起结算。
+  （2）在选购中，每件商品的订购数量默认为一件，如果您想购买多件商品，可直接在购买单品页加减，也可在购物页面改写。
+  （3） 如果您想删除购物车中的某样商品，可以点击“删除”按钮进行删除操作。
+  提交订单（1）填写订货人信息
+  请填写真实的订货人和收货人姓名、所在地区、详细的收货地址、邮编和联系电话。
+  （2）选择支付信息
+  易从书画网为您提供了网上支付、货到付款、银行转账、邮局汇款等多种支付方式。
+  （3）填写配送信息
+  易从书画网为您提供优质快递送货上门、普通邮递两种送货方式。如果您想选择优质快递送货上门，请先核对您的地址是否在相应的送货范围内。如果您不在快递送货上门的范围，请选择普通快递。
+  （4）填写备注信息
+  请填写您的特殊要求或者提醒信息，我们会尽量根据您的要求给予处理。
+  （5）确认无误后，请点击“提交订单”按钮提交订单，完成订购。
+  填写完以上信息之后，请仔细核对；确认无误后，请点击“提交订单”按钮提交订单。生成订单号后，表明您已经成功提交了订单。我们的客服人员会在您方便的时间与您取得联系，为您确认订单。
+  查看订单状态
+  提交订单表示您已经阅读并接受了易从书画网的“用户协议”。您的订单是您购买易从书画网产品的自我意愿，我们的客服和您确认订单后您耐心等待收货或者上门自提。您也可以通过会员中心“订单查询”按钮查询您的订单信息。
+  收货评价
+  您收到商品后请登录会员中心进行收货确认，并给出您的评价。
 </div>

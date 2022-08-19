@@ -1,0 +1,211 @@
+<div style="height: 50px;background-color: #F8F8F8"></div>
+<div class="header">
+  <div class="header-bars-left-arrow" (click)="backPreviousPage()">
+    <img src="http://shenghenduooss.gohong.com/dongbao-mobile/vip-level/left-arrow.png" style="height: 20px;position: relative;top: 5px;" alt="">
+  </div>
+  <div class="header-content">我的卡密</div>
+</div>
+
+
+<div class="search-div">
+  <div class="search-icon" (click)="backPreviousPage()">
+    <svg t="1657091744171" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3324" width="128" height="128"><path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" p-id="3325" fill="#8a8a8a"></path></svg>
+  </div>
+  <div class="search-input">
+    <input
+      type="text"
+      placeholder="搜索我的会员卡"
+      [(ngModel)]="keywordFilter"
+      (ngModelChange)="filterVipLevelUpgradeCards()"/>
+  </div>
+  <div class="search-filter"
+       (click)="showPicker()"
+    >
+    <svg t="1657082586086" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1345" width="48" height="48"><path d="M810.666667 384a128 128 0 0 0-120.32 85.333333H128a42.666667 42.666667 0 0 0 0 85.333334h562.346667A128 128 0 1 0 810.666667 384zM128 298.666667h50.346667a128 128 0 0 0 240.64 0H896a42.666667 42.666667 0 0 0 0-85.333334H418.986667a128 128 0 0 0-240.64 0H128a42.666667 42.666667 0 0 0 0 85.333334zM896 725.333333h-306.346667a128 128 0 0 0-240.64 0H128a42.666667 42.666667 0 0 0 0 85.333334h221.013333a128 128 0 0 0 240.64 0H896a42.666667 42.666667 0 0 0 0-85.333334z" fill="#515151" p-id="1346"></path></svg>
+  </div>
+</div>
+
+<Tabs
+  [page]="3"
+  [useOnPan]="true"
+  [swipeable]="false"
+  [activeTab]="0"
+  style="height: auto"
+  [tabBarBackgroundColor]="'#F8F8F8'"
+  [tabBarActiveTextColor]="'#1890ff'"
+  (onChange)="filterVipLevelUpgradeCards($event)"
+  (onTabClick)="filterVipLevelUpgradeCards($event)"
+>
+  <TabPane [title]="titleTemplate1">
+    <ng-template #titleTemplate1>
+      <div>累计({{total}})</div>
+    </ng-template>
+
+    <div>
+      <div class="card-list">
+        <div class="card" *ngFor="let card of filtedVipLevelUpgradeCards">
+          <div class="card-image" (click)="checkingVipLevelUpgradeCard = card;showCardDetail = true"
+               [style.background-image]="
+               card.vipLevelId == '2' ?
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/agent-card.png)' :
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/level1-vip-card.png)'
+                "
+               [style.background-repeat]="'no-repeat'"
+               [style.background-size]="'100% auto'">
+            <div class="card-no" [style]="card.vipLevelId == '2' ? 'color: #6D3720' : ''">
+              {{card.cardNo}}
+            </div>
+            <div class="card-type">
+              {{card.alreadyUsed ? '已绑定' : '未绑定'}}
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="add-time">
+              购卡时间: {{card.addTime | date: 'yyyy-MM-dd'}}
+            </div>
+            <div class="share-button">
+              <div>
+                <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"
+                     height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>
+              </div>
+              <span (click)="copyText(card.cardNo)">复制&nbsp;</span>
+            </div>
+            <div class="share-button">
+              <div>
+                <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"
+                     height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>
+              </div>
+              <span (click)="shareText(card.cardNo)">分享&nbsp;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </TabPane>
+
+
+  <TabPane [title]="titleTemplate2">
+    <ng-template #titleTemplate2>
+      <div>未使用({{unusedCount}})</div>
+    </ng-template>
+    <div>
+      <div class="card-list">
+        <div class="card" *ngFor="let card of filtedVipLevelUpgradeCards">
+          <div class="card-image" (click)="checkingVipLevelUpgradeCard = card;showCardDetail = true"
+               [style.background-image]="
+               card.vipLevelId == '2' ?
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/agent-card.png)' :
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/level1-vip-card.png)'
+                "
+               [style.background-repeat]="'no-repeat'"
+               [style.background-size]="'100% auto'">
+            <div class="card-no" [style]="card.vipLevelId == '2' ? 'color: #6D3720' : ''">
+              {{card.cardNo}}
+            </div>
+            <div class="card-type">
+              {{card.alreadyUsed ? '已绑定' : '未绑定'}}
+            </div>
+          </div>
+          <div class="card-info">
+            <div class="add-time">
+              购卡时间: {{card.addTime | date: 'yyyy-MM-dd'}}
+            </div>
+            <div class="share-button">
+              <div>
+                <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"
+                     height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>
+              </div>
+              <span (click)="copyText(card.cardNo)">复制&nbsp;</span>
+            </div>
+            <div class="share-button">
+              <div>
+                <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"
+                     height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>
+              </div>
+              <span (click)="shareText(card.cardNo)">分享&nbsp;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </TabPane>
+
+  <TabPane [title]="titleTemplate3">
+    <ng-template #titleTemplate3>
+      <div>已使用({{usedCount}})</div>
+    </ng-template>
+    <div class="card-list">
+      <div class="card" *ngFor="let card of filtedVipLevelUpgradeCards">
+        <div class="card-image" (click)="checkingVipLevelUpgradeCard = card;showCardDetail = true"
+             [style.background-image]="
+               card.vipLevelId == '2' ?
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/agent-card.png)' :
+               'url(http://shenghenduooss.gohong.com/dongbao-mobile/vip-level-upgrade-card/level1-vip-card.png)'
+                "
+             [style.background-repeat]="'no-repeat'"
+             [style.background-size]="'100% auto'">
+          <div class="card-no" [style]="card.vipLevelId == '2' ? 'color: #6D3720' : ''">
+            {{card.cardNo}}
+          </div>
+          <div class="card-type">
+            {{card.alreadyUsed ? '已绑定' : '未绑定'}}
+          </div>
+        </div>
+        <div class="card-info">
+          <div class="add-time">
+            购卡时间: {{card.addTime | date: 'yyyy-MM-dd'}}
+          </div>
+          <div class="share-button">
+            <div>
+<!--              <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"-->
+<!--                   height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>-->
+            </div>
+            <span (click)="copyText(card.cardNo)">复制&nbsp;</span>
+          </div>
+          <div class="share-button">
+            <div>
+<!--              <svg t="1656987617888" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2277" width="128"-->
+<!--                   height="128"><path d="M736 800c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M288 576c-35.296 0-64-28.704-64-64s28.704-64 64-64 64 28.704 64 64-28.704 64-64 64M736 224c35.296 0 64 28.704 64 64s-28.704 64-64 64-64-28.704-64-64 28.704-64 64-64m0 384a127.776 127.776 0 0 0-115.232 73.28l-204.896-117.056a30.848 30.848 0 0 0-9.696-3.2A127.68 127.68 0 0 0 416 512c0-6.656-0.992-13.088-1.984-19.456 0.608-0.32 1.28-0.416 1.856-0.768l219.616-125.472A127.328 127.328 0 0 0 736 416c70.592 0 128-57.408 128-128s-57.408-128-128-128-128 57.408-128 128c0 6.72 0.992 13.152 1.984 19.616-0.608 0.288-1.28 0.256-1.856 0.608l-219.616 125.472A127.328 127.328 0 0 0 288 384c-70.592 0-128 57.408-128 128s57.408 128 128 128a126.912 126.912 0 0 0 84.544-32.64 31.232 31.232 0 0 0 11.584 12.416l224 128c0.352 0.224 0.736 0.256 1.12 0.448C615.488 812.992 669.6 864 736 864c70.592 0 128-57.408 128-128s-57.408-128-128-128" p-id="2278" fill="#1890FF"></path></svg>-->
+            </div>
+            <span (click)="shareText(card.cardNo)">分享&nbsp;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </TabPane>
+
+</Tabs>
+
+<!-- card-detail -->
+<Modal [(ngModel)]="this.showCardDetail" [popup]="true" [animationType]="'slide-up'">
+  <List renderHeader="详情信息" [className]="'popup-list'">
+    <InputItem
+      [editable]="false"
+      type="text"
+      [clear]="true"
+      [content]="'用户昵称'"
+      [value]="checkingVipLevelUpgradeCard.userName ? checkingVipLevelUpgradeCard.userName : '未使用'"
+    >
+    </InputItem>
+    <InputItem
+      [editable]="false"
+      type="text"
+      [clear]="true"
+      [content]="'邀请码'"
+      [value]="checkingVipLevelUpgradeCard.userInviteCode ? checkingVipLevelUpgradeCard.userInviteCode : '未使用'"
+    >
+    </InputItem>
+    <InputItem
+      [editable]="true"
+      type="text"
+      [clear]="true"
+      [placeholder]="'备注'"
+      [content]="'备注'"
+      [value]="checkingVipLevelUpgradeCard.remark ? checkingVipLevelUpgradeCard.remark : '-'">
+    </InputItem>
+    <ListItem>
+      <div Button [type]="'primary'" (onClick)="this.showCardDetail = false" (click)="updateRemark()">确定</div>
+    </ListItem>
+  </List>
+</Modal>
+
