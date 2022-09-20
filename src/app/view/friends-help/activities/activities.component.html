@@ -1,0 +1,39 @@
+<div
+  [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/background.png)'"
+  [style.background-color]="'#1E1B1B'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'100% auto'">
+  >
+
+  <!-- 挡板 -->
+  <div style="height: 70vw;width: 100vw;">
+  </div>
+
+  <!-- label -->
+  <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/label.png"
+       style="width: 90vw;margin-left: 5vw;margin-bottom: 4vw;"
+       alt="">
+
+  <div *ngFor="let friendsHelpActivity of friendsHelpActivities"
+       class="coupon"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/coupon.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+    <div class="dailyStockInitialValue">每日限量{{friendsHelpActivity.dailyStockInitialValue}}份</div>
+    <img [src]="friendsHelpActivity.imageUrl" alt=""/>
+    <div class="title">{{friendsHelpActivity.title}}</div>
+    <div class="friendsRequired">{{friendsHelpActivity.friendsRequired}}人助力免费得</div>
+    <div
+      class="button"
+      [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/coupon-button.png)'"
+      [style.background-repeat]="'no-repeat'"
+      [style.background-size]="'100% 100%'"
+      (click)="jump2ActivityInfo(friendsHelpActivity)"
+    >
+    </div>
+
+
+  </div>
+
+
+</div>

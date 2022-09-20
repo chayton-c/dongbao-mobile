@@ -4,5 +4,23 @@ node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --prod
 ng build --prod
 ng g c view/taobao-goods
 ng g module view/custom-html-page --route custom-html-page --module app.module
+
+// 生成添加惰性加载模块 https://angular.cn/guide/lazy-loading-ngmodules
+ng g module new-module-name --module parent-module --routing true --route path-string
+
+例:
+ng g module view/friends-help --module app.module --route friends-help --routing true
+
+注释:
+ng generate module module-name:它将生成一个带有 name 的模块new-module-name。
+--module parent-module：新创建的模块将被添加到父模块app中，大部分时间都是模块。
+--routing true:生成路由和一个默认延迟加载的组件
+--route path-string: path-string将作为路由器添加到父模块路由配置中。
+
+// 生成惰性加载模块下的组件
+ng g c view/friends-help/activities --module friends-help-routing
+然后在friends-help-routing.module.ts的routes中手动添加路由（我查不到更好的命令，只能手动添加了）
+
+
 预渲染
 npm run prerender

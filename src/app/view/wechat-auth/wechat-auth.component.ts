@@ -64,9 +64,9 @@ export class WechatAuthComponent implements OnInit {
       this.http.post('/api/mobile/wechat/wechatPlatform/saveCustomerInfo', HttpUtils.createBody(codeParams), HttpUtils.createHttpOptions()).subscribe((res: any) => {
         if (!res.success) {
           this._toast.fail("网络繁忙，请稍后再试!" + res.msg);
+          window.location.href = "https://a.app.qq.com/o/simple.jsp?pkgname=com.provincemany";
         }
       });
-      window.location.href = "https://a.app.qq.com/o/simple.jsp?pkgname=com.provincemany";
     }
   }
 
