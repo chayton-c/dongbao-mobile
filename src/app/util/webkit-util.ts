@@ -4,8 +4,22 @@ import {Router} from "@angular/router";
 
 export class WebkitUtil {
 
+  public static NONE = 0;
+  public static BACK_PREVIOUS_PAGE = 1;
+  public static TAOBAO_CONVERT = 2;
+  public static JINGDONG_CONVERT = 3;
+  public static PINDUODUO_CONVERT = 4;
+  public static WECHAT_MINIPROGRAM = 5;
+  public static MEITUAN_WECHAT_MINIPROGRAM = 6;
+  public static COPY_AND_SHARE_IMAGE_THEN_SHARE_ON_WECHAT_MINIPROGRAM = 7;
+  public static TEXT_SHARE = 8;
+  public static MEITUANYOUXUAN_WECHAT_MINIPROGRAM = 9;
+  public static REDIRECT_TO_H5 = 10;
+  public static NAVIGATE_TO_OTHER_PAGE = 11;
+  public static CREATE_URL = 12;
 
-  static postMessage(
+
+  static postMessageByCustomHtmlComponentOperationType(
     operationType:number,
     activityLinkConvertInfo?: ActivityLinkConvertInfo,
     android?: number,
@@ -17,159 +31,272 @@ export class WebkitUtil {
   ) {
     let customHtmlComponentConstant: CustomHtmlComponentConstant = new CustomHtmlComponentConstant();
 
+    let webkitUtilOperationType: number;
+    switch (operationType) {
+      case customHtmlComponentConstant.DO_NOT_NEED_TO_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.NONE;
+        break;
+      }
+      case customHtmlComponentConstant.BACK_PREVIOUS_PAGE: {
+        webkitUtilOperationType = WebkitUtil.BACK_PREVIOUS_PAGE;
+        break;
+      }
+      case customHtmlComponentConstant.TAOBAO_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.TAOBAO_CONVERT;
+        break;
+      }
+      case customHtmlComponentConstant.JINGDONG_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.JINGDONG_CONVERT;
+        break;
+      }
+      case customHtmlComponentConstant.PINDUODUO_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.PINDUODUO_CONVERT;
+        break;
+      }
+
+      case customHtmlComponentConstant.ELEME_CONVERT:
+      case customHtmlComponentConstant.AMAP_CONVERT:
+      case customHtmlComponentConstant.JUTUIKE_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.WECHAT_MINIPROGRAM;
+        break;
+      }
+
+      case customHtmlComponentConstant.MEITUAN_SHARE:
+      case customHtmlComponentConstant.JUTUIKE_SHARE:
+      case customHtmlComponentConstant.MEITUAN_YOUXUAN_SHARE:
+      case customHtmlComponentConstant.ELEME_SHARE:
+      case customHtmlComponentConstant.AMAP_SHARE: {
+        webkitUtilOperationType = WebkitUtil.COPY_AND_SHARE_IMAGE_THEN_SHARE_ON_WECHAT_MINIPROGRAM;
+        break;
+      }
+
+      case customHtmlComponentConstant.MEITUAN_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.MEITUAN_WECHAT_MINIPROGRAM;
+        break;
+      }
+      case customHtmlComponentConstant.MEITUAN_YOUXUAN_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.MEITUANYOUXUAN_WECHAT_MINIPROGRAM;
+        break;
+      }
+      case customHtmlComponentConstant.REDIRECT_TO_H5: {
+        webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
+        break;
+      }
+      case customHtmlComponentConstant.JUTUIKE_VIP_CARD_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
+        break;
+      }
+      case customHtmlComponentConstant.JUTUIKE_H5_CONVERT: {
+        webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
+        break;
+      }
+      case customHtmlComponentConstant.NAVIGATE_TO_OHTER_PAGE: {
+        webkitUtilOperationType = WebkitUtil.NAVIGATE_TO_OTHER_PAGE;
+        break;
+      }
+      default: webkitUtilOperationType = WebkitUtil.NONE;
+    }
+    WebkitUtil.postMessage(webkitUtilOperationType, activityLinkConvertInfo, android, pageRedirectInfo);
+  }
+
+  static postMessage(
+    operationType:number,
+    activityLinkConvertInfo?: ActivityLinkConvertInfo,
+    android?: number,
+    pageRedirectInfo?: {
+      router: Router,
+      redirectUrl: string,
+      customerId: string,
+      title?: string
+    }
+  ) {
+    let customHtmlComponentConstant: CustomHtmlComponentConstant = new CustomHtmlComponentConstant();
+
     let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
 
-    if (operationType == customHtmlComponentConstant.BACK_PREVIOUS_PAGE) {
-      console.log("backPreviousPage")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.backPreviousPage('');
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.backPreviousPage.postMessage(s);
-      }
-      return;
-    }
-
-    if (operationType == customHtmlComponentConstant.DO_NOT_NEED_TO_CONVERT) {
-      console.log("DO_NOT_NEED_TO_CONVERT")
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.TAOBAO_CONVERT) {
-      console.log("taobaoScheme")
-
-
-      if (android) {
-        // @ts-ignore
-        window.Android.taobaoScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.taobaoScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.JINGDONG_CONVERT) {
-      console.log("jingdongScheme")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.jingdongScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.jingdongScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.PINDUODUO_CONVERT) {
-      console.log("pinduoduoScheme")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.pinduoduoScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.pinduoduoScheme.postMessage(s);
-      }
-      return;
-    }
-    if (
-      operationType == customHtmlComponentConstant.ELEME_CONVERT
-      || operationType == customHtmlComponentConstant.AMAP_CONVERT
-      || operationType == customHtmlComponentConstant.JUTUIKE_CONVERT
-    ) {
-      console.log("elemeScheme")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.elemeScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.elemeScheme.postMessage(s);
-      }
-      return;
-    }
-
-    if (operationType == customHtmlComponentConstant.MEITUAN_CONVERT) {
-      console.log("meituanScheme")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.meituanScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.meituanScheme.postMessage(s);
-      }
-      return;
-    }
-    if (
-      operationType == customHtmlComponentConstant.MEITUAN_SHARE
-      || operationType == customHtmlComponentConstant.JUTUIKE_SHARE
-      || operationType == customHtmlComponentConstant.MEITUAN_YOUXUAN_SHARE
-      || operationType == customHtmlComponentConstant.ELEME_SHARE
-      || operationType == customHtmlComponentConstant.AMAP_SHARE) {
-      console.log("takeoutShare")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.takeoutShare(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.takeoutShare.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.MEITUAN_YOUXUAN_CONVERT) {
-      console.log("meituanScheme")
-
-      if (android) {
-        // @ts-ignore
-        window.Android.meituanScheme(s);
-      } else {
-        // @ts-ignore
-        window.webkit.messageHandlers.meituanScheme.postMessage(s);
-      }
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.REDIRECT_TO_H5) {
-      window.location.href = pageRedirectInfo!.redirectUrl;
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.JUTUIKE_VIP_CARD_CONVERT || operationType == customHtmlComponentConstant.JUTUIKE_H5_CONVERT) {
-      window.location.href = activityLinkConvertInfo!.url;
-      return;
-    }
-    if (operationType == customHtmlComponentConstant.NAVIGATE_TO_OHTER_PAGE) {
-      let redirectUrl = pageRedirectInfo!.redirectUrl;
-      let id = WebkitUtil.getQueryVar('id', redirectUrl);
-
-      if (android) {
-        pageRedirectInfo!.router!.navigate(['/multiple-button-activity'], {
-          queryParams: {
-            customerId: pageRedirectInfo!.customerId,
-            id: id,
-            android: android,
-            ios: !android
-          },
-        });
-      } else {
-        if (redirectUrl.indexOf("?") == -1)
-          redirectUrl += "?a=1";
-        if (redirectUrl.indexOf("customerId") == -1)
-          redirectUrl += "&customerId=" + pageRedirectInfo!.customerId;
-        if (redirectUrl.indexOf("ios") == -1)
-          redirectUrl += "&ios=1";
-
-        let activityLinkConvertInfo: ActivityLinkConvertInfo = {
-          shareBasePictureUrl: "", url: redirectUrl, wxMiniprogramOriginalId: "", wxMiniprogramPath: "", wxMiniprogramQrcodeUrl: "",
-          text: "", copyBeforeAction: "", title: ""
+    switch (operationType) {
+      case WebkitUtil.BACK_PREVIOUS_PAGE: {
+        if (android) {
+          // @ts-ignore
+          window.Android.backPreviousPage('');
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.backPreviousPage.postMessage(s);
         }
-        let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
-        // @ts-ignore
-        window.webkit.messageHandlers.redirectToUrl.postMessage(s);
+        break;
       }
-      return;
+      case WebkitUtil.TAOBAO_CONVERT: {
+        console.log("taobaoScheme")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.taobaoScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.taobaoScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.JINGDONG_CONVERT: {
+        console.log("jingdongScheme")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.jingdongScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.jingdongScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.PINDUODUO_CONVERT: {
+        console.log("pinduoduoScheme")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.pinduoduoScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.pinduoduoScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.WECHAT_MINIPROGRAM: {
+        console.log("WECHAT_MINIPROGRAM")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.elemeScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.elemeScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.MEITUAN_WECHAT_MINIPROGRAM: {
+        console.log("MEITUAN_WECHAT_MINIPROGRAM")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.meituanScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.meituanScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.COPY_AND_SHARE_IMAGE_THEN_SHARE_ON_WECHAT_MINIPROGRAM: {
+        console.log("COPY_AND_SHARE_IMAGE_THEN_SHARE_ON_WECHAT_MINIPROGRAM")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.takeoutShare(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.takeoutShare.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.TEXT_SHARE: {
+        console.log("TEXT_SHARE")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.textShare(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.textShare.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.MEITUANYOUXUAN_WECHAT_MINIPROGRAM: {
+        console.log("MEITUANYOUXUAN_WECHAT_MINIPROGRAM")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.meituanScheme(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.meituanScheme.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.REDIRECT_TO_H5: {
+        if (activityLinkConvertInfo && activityLinkConvertInfo.url)
+          window.location.href = pageRedirectInfo!.redirectUrl;
+        else
+          window.location.href = pageRedirectInfo!.redirectUrl;
+        return;
+      }
+      case WebkitUtil.NAVIGATE_TO_OTHER_PAGE: {
+        let redirectUrl = pageRedirectInfo!.redirectUrl;
+        let id = WebkitUtil.getQueryVar('id', redirectUrl);
+
+        if (android) {
+          pageRedirectInfo!.router!.navigate(['/multiple-button-activity'], {
+            queryParams: {
+              customerId: pageRedirectInfo!.customerId,
+              id: id,
+              android: android,
+              ios: !android
+            },
+          });
+        } else {
+          if (redirectUrl.indexOf("?") == -1)
+            redirectUrl += "?a=1";
+          if (redirectUrl.indexOf("customerId") == -1)
+            redirectUrl += "&customerId=" + pageRedirectInfo!.customerId;
+          if (redirectUrl.indexOf("ios") == -1)
+            redirectUrl += "&ios=1";
+
+          let activityLinkConvertInfo: ActivityLinkConvertInfo = {
+            shareBasePictureUrl: "", url: redirectUrl, wxMiniprogramOriginalId: "", wxMiniprogramPath: "", wxMiniprogramQrcodeUrl: "",
+            text: "", copyBeforeAction: "", title: ""
+          }
+          let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
+          // @ts-ignore
+          window.webkit.messageHandlers.redirectToUrl.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.CREATE_URL: {
+        let redirectUrl = pageRedirectInfo!.redirectUrl;
+
+        if (android) {
+          window.location.href = pageRedirectInfo!.redirectUrl;
+        } else {
+          let activityLinkConvertInfo: ActivityLinkConvertInfo = {
+            shareBasePictureUrl: "", url: redirectUrl, wxMiniprogramOriginalId: "", wxMiniprogramPath: "", wxMiniprogramQrcodeUrl: "",
+            text: "", copyBeforeAction: "", title: pageRedirectInfo!.title
+          };
+          let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
+          // @ts-ignore
+          window.webkit.messageHandlers.redirectToUrl.postMessage(s);
+        }
+        return;
+      }
+      case WebkitUtil.NONE:
+      default: {
+        console.log("DO_NOT_NEED_TO_CONVERT")
+      }
     }
+
+    if (operationType == customHtmlComponentConstant.NAVIGATE_TO_OHTER_PAGE) {
+    }
+  }
+
+  static wechatPayment(paymentParams: any, android: number) {
+    console.log("wechatPayment")
+    let s = paymentParams ? JSON.stringify(paymentParams) : "";
+
+    if (android) {
+      // @ts-ignore
+      window.Android.wechatPayment(s);
+    } else {
+      // @ts-ignore
+      window.webkit.messageHandlers.wechatPayment.postMessage(s);
+    }
+    return;
   }
 
   static getQueryVar(varName: string, href: string): string {

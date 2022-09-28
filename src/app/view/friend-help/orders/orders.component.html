@@ -1,0 +1,63 @@
+<div class="orders">
+  <div *ngFor="let order of friendsHelpOrders;" class="order">
+    <div class="titleAndStatus">
+      <div class="title">
+        {{order.name}}
+      </div>
+      <div class="orderStatus" [ngSwitch]="order.orderStatus">
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_HAS_BEEN_CANCELED">
+          已取消
+        </div>
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_NOT_PAID" style="color: #FE2A2B">
+          等待支付
+        </div>
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_HAS_BEEN_PLACE">
+          已支付
+        </div>
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_HAS_BEEN_SETTLED_SUCCESSFULLY">
+          已完成
+        </div>
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_HAS_BEEN_CLOSED">
+          已关闭
+        </div>
+        <div *ngSwitchCase="FriendsHelpOrderConstant.ORDER_HAS_BEEN_REFUND">
+          已维权
+        </div>
+      </div>
+    </div>
+    <div class="infos">
+      <div class="left">
+        <span class="label">订单编号: </span>
+        <span class="strong">{{order.id}}</span>
+      </div>
+      <div class="right">
+        <span class="red">{{order.orderPrice}}元</span>
+      </div>
+    </div>
+    <div class="infos">
+      <div class="left">
+        <span class="label">手机号码: </span>
+        <span class="strong">{{order.orderTel}}</span>
+      </div>
+      <div class="right">
+        <span class="label">下单时间: </span>
+        <span class="strong">{{order.addTimeStr}}</span>
+      </div>
+    </div>
+<!--    -->
+    <div class="payment" *ngIf="order.orderStatus == FriendsHelpOrderConstant.ORDER_NOT_PAID">
+      <div class="dividingLine">
+      </div>
+      <div class="countdown" *ngIf="order.countdown">
+        剩余{{order.countdown}}
+      </div>
+      <div class="button" (click)="pay(order)">
+        去支付
+      </div>
+    </div>
+  </div>
+  <div *ngIf="friendsHelpOrders.length == 0" class="none-style">
+    暂无数据
+  </div>
+</div>
+

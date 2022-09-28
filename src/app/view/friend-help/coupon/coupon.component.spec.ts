@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FriendsHelpComponent } from './friends-help.component';
+import { CouponComponent } from './coupon.component';
 
-describe('FriendsHelpComponent', () => {
-  let component: FriendsHelpComponent;
-  let fixture: ComponentFixture<FriendsHelpComponent>;
+describe('CouponComponent', () => {
+  let component: CouponComponent;
+  let fixture: ComponentFixture<CouponComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FriendsHelpComponent ]
+      declarations: [ CouponComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FriendsHelpComponent);
+    fixture = TestBed.createComponent(CouponComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

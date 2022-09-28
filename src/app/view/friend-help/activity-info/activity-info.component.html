@@ -1,0 +1,114 @@
+<div
+  [style.background-image]="'url(' + friendsHelpActivity.detailImageUrl + ')'"
+  [style.background-color]="'#F8662D'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'100% auto'">
+
+  <div style="height: 63vw"></div>
+
+  <div
+    class="activityAward"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/coupon-info.png'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+  </div>
+
+  <div
+    class="friendsHelpCustomersHead"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/friends-help-customers-background.png)'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+    <div>
+      助力用户可获得{{startThirtyDaysLoginGoldCoinsCommission.toFixed(0)}}元新人红包<br/>
+      已邀请{{friendsHelpsCount}}人
+    </div>
+  </div>
+  <div class="friendsHelpCustomersContent"
+       [style.height]="(Math.ceil(friendsHelps.length / 4) * 22 + 1) + 'vw'"
+  >
+    <img *ngFor="let friendsHelp of friendsHelps" [src]="friendsHelp.friendsAvatar" alt=""/>
+  </div>
+
+  <div class="button"
+       *ngIf="!this.hasSettlementRecord"
+       (click)="createPassword()"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/invite-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+
+  <div class="button"
+       *ngIf="this.hasSettlementRecord"
+       (click)="jump2Purchase()"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/receive-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+
+  <div class="button"
+       *ngIf="!this.hasSettlementRecord"
+       (click)="payment()"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/purchase-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+</div>
+
+<div class="loading" *ngIf="loading">
+</div>
+
+<!-- 模态框mask -->
+<div class="mask"
+     *ngIf="initiaingCustomerFriendsHelp && !initiaingCustomerFriendsHelpCanceled"
+     (click)="initiaingCustomerFriendsHelpCanceled = true">
+</div>
+
+<!-- 好友发起助力模态框 -->
+<div
+  class="friends-help-alert"
+  *ngIf="initiaingCustomerFriendsHelp && !initiaingCustomerFriendsSend && !initiaingCustomerFriendsHelpCanceled"
+  [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/friends-help-alert.png)'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'100% auto'">
+  <div class="initiatingCustomer" *ngIf="initiatingCustomer">
+    <img [src]="initiatingCustomer!.avatar" alt=""/>
+    <span>{{initiatingCustomer!.displayName}}</span>
+  </div>
+  <div class="description">
+    快来帮我助力吧！
+  </div>
+  <div class="confirm-button"
+       (click)="createFriendsHelp()"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/alert-confirm-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+  <div class="close-button"
+       (click)="initiaingCustomerFriendsHelpCanceled = true"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/alert-close-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+</div>
+
+<!-- 助力结果模态框 -->
+<div class="result-alert" *ngIf="initiaingCustomerFriendsSend && !initiaingCustomerFriendsHelpCanceled">
+  <div class="top">
+    <div class="initiatingCustomer" *ngIf="initiatingCustomer">
+      <img [src]="initiatingCustomer!.avatar" alt=""/>
+      <span>{{initiatingCustomer!.displayName}}</span>
+    </div>
+    <div class="description">
+      {{messageTitle}}
+    </div>
+  </div>
+  <div class="bottom">
+    {{messageContnet}}
+  </div>
+  <div class="close-button"
+       (click)="initiaingCustomerFriendsHelpCanceled = true"
+       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/alert-close-button.png)'"
+       [style.background-repeat]="'no-repeat'"
+       [style.background-size]="'100% auto'">
+  </div>
+</div>

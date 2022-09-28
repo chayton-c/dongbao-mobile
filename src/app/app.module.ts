@@ -10,6 +10,7 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { TestComponent } from './view/test/test.component';
 import { TutorialComponent } from './view/tutorial/tutorial.component';
 import {MatCardModule} from "@angular/material/card";
+import { SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,15 +18,16 @@ import {MatCardModule} from "@angular/material/card";
     TestComponent,
     TutorialComponent,
   ],
-    imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        NgZorroAntdMobileModule,
-        MatCardModule
-    ],
+  imports: [
+      BrowserModule.withServerTransition({ appId: 'serverApp' }),
+      AppRoutingModule,
+      SharedModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      HttpClientModule,
+      NgZorroAntdMobileModule,
+      MatCardModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

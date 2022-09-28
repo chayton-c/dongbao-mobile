@@ -12,7 +12,11 @@ const routes: Routes = [
   { path: 'multiple-button-activity', loadChildren: () => import('./view/custom-html-page/custom-html-page.module').then(m => m.CustomHtmlPageModule) },
   { path: 'vip-level', loadChildren: () => import('./view/vip-level/vip-level.module').then(m => m.VipLevelModule) },
   { path: 'vip-level-upgrade-card', loadChildren: () => import('./view/vip-level-upgrade-card/vip-level-upgrade-card.module').then(m => m.VipLevelUpgradeCardModule) },
-  { path: 'friends-help', loadChildren: () => import('./view/friends-help/friends-help.module').then(m => m.FriendsHelpModule) },
+  { path: 'friends-help/activities', loadChildren: () => import('./view/friend-help/activities/activities.module').then(m => m.ActivitiesModule) },
+  { path: 'friends-help/activity-info', loadChildren: () => import('./view/friend-help/activity-info/activity-info.module').then(m => m.ActivityInfoModule) },
+  { path: 'friends-help/coupon', loadChildren: () => import('./view/friend-help/coupon/coupon.module').then(m => m.CouponModule) },
+  { path: 'friends-help/orders', loadChildren: () => import('./view/friend-help/orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'friends-help/purchase', loadChildren: () => import('./view/friend-help/purchase/purchase.module').then(m => m.PurchaseModule) },
 ];
 
 @NgModule({

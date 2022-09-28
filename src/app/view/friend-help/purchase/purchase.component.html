@@ -1,0 +1,130 @@
+<div class="content">
+  <div class="tel-input">
+    <div class="tel-input-label">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/tel-input-label.png" alt=""/>
+    </div>
+    <div class="input">
+      <input type="number"
+             [(ngModel)]="orderTel" name="orderTel"
+             maxlength="11"
+             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+             placeholder="请输入手机号">
+    </div>
+    <div class="tel-input-clear">
+      <img
+        (click)="orderTel = undefined"
+        src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/tel-input-clear-btn.png" alt=""/>
+    </div>
+  </div>
+
+  <div class="label">
+    <span class="text">特惠充值</span>
+    <!-- 下划线 -->
+    <div class="line"></div>
+  </div>
+
+  <div class="goods-list">
+    <div *ngFor="let goods of goodsList;let i = index;"
+         (click)="initPurchaseModel(goods)"
+         [style.border-color]="goods.stock > 0 ? '#FE819D' : '#828282'"
+         class="goods">
+
+      <div class="label">
+        <img *ngIf="goods.stock <= 0" src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/sold-out-goods-label.png" alt=""/>
+        <img *ngIf="i == 1 && goods.stock > 0" src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/recommend-goods-label.png" alt=""/>
+      </div>
+
+      <div class="price">{{goods.price}}元</div>
+
+      <div class="actual-price">优惠价{{goods.friendsHelpGoodsCoupon ? goods.actualPrice - goods.friendsHelpGoodsCoupon.amount : goods.actualPrice}}</div>
+    </div>
+  </div>
+
+  <div class="coupon-selection" (click)="bestCoupon ? jump2Coupon() : jump2ActivityInfo()">
+    <div class="coupon-label">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/coupon-label.png" alt=""/>
+    </div>
+    <div class="text">
+      {{bestCoupon ? '话费优惠券     减￥' + bestCoupon.amount.toFixed(2) : '优惠券  未选优惠券，最高5元可用'}}
+    </div>
+    <div class="coupon-redirect-label">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/coupon-redirect-label.png" alt=""/>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <div (click)="jump2Coupon()">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/coupons.png" alt=""/>
+      <div class="text">我的券</div>
+    </div>
+    <div (click)="jump2Order()">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/orders.png" alt=""/>
+      <div class="text">我的订单</div>
+    </div>
+    <div>
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/customer-service.png" alt=""/>
+      <div class="text">客服</div>
+    </div>
+    <div>
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/others.png" alt=""/>
+      <div class="text">其他充值</div>
+    </div>
+  </div>
+
+  <div class="rules">
+    常见问题<br/>
+    1、本业务为话费专享优惠，充值支付后72小时内到账，请留意【充值成功通知】短信。<br/>
+    2、因运营商维护等因素，部分订单实际到账时间略有延迟，请联系客服咨询。<br/>
+    3、月初月末充值量较大，如充值失败请隔天再试。<br/>
+    4、三网均可充值，没有地区限制，极小部分地区充值可能会失败。充值失败的订单将会自动退款并返还话费券。<br/>
+    5、同账户每月可以为一个手机号充值缴费。<br/>
+    6、话费为虚拟充值类商品，携号转网、副卡号码、虚拟号暂无法充值。如果您遇到充错号/空号的情况，不支持退单。请仔细核对充值账号。<br/>
+    7、话费充值为代缴业务，如需要开具发票请联系运营商客服处理。<br/>
+  </div>
+</div>
+
+<div class="mask"
+     *ngIf="purchaseModel"
+     (click)="purchaseModel = false">
+</div>
+
+<div class="purchaseModel" *ngIf="selectGoods && purchaseModel">
+  <div class="title">
+    <div class="order-price">
+      ￥{{selectGoods.friendsHelpGoodsCoupon ? selectGoods.actualPrice - selectGoods.friendsHelpGoodsCoupon.amount : selectGoods.actualPrice}}
+    </div>
+    <div class="close-btn" (click)="purchaseModel = false">
+      <img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/purchase-model-close-btn.png" alt=""/>
+    </div>
+  </div>
+  <div class="order-info">
+    <div class="line">
+      <div class="label">订单信息</div>
+      <div class="value">{{selectGoods.description}}</div>
+    </div>
+    <div class="line">
+      <div class="label">充值号码</div>
+      <div class="value-important">{{orderTel}}</div>
+    </div>
+    <div class="line">
+      <div class="label">支付方式</div>
+      <div class="value">微信支付</div>
+    </div>
+  </div>
+  <div class="rules">
+    <h3>充值须知</h3>
+    <div>①本业务为话费慢充专享优惠，充值支付后一般24小时到账，最晚72-84小时到账或失败，请留意【充值成功通知】运营商短信或微信支付退款消息</div>
+    <div style="color: red">②月初充值高峰期，100元及以上面额【可能】会分批到账(例如充值100元，可能会分为30+30+30+10四笔到账)，请提前了解并周知</div>
+    <div>③集团号码、携号转网、合账账户，副卡不支持充值不售后，如不慎购买24小时内自动退款。</div>
+    <div>④因本业务为第三方代充值服务，故无法提供充值发票，有开票需求的请勿充值。</div>
+    <div>⑤本充值页面为第三方服务平台，虚拟物品不退不换，如有疑问和其他问题，可点击我的页面“联系客服”进行答疑和咨询。</div>
+  </div>
+  <div class="confirm-rules">
+    <mat-checkbox [(ngModel)]="confirmRules">我已阅读并了解上述【充值须知】，并已确认充值手机号码</mat-checkbox>
+<!--    <div [style]="confirmRules ? 'border:none' : ''"></div>-->
+  </div>
+  <div class="pay-button" (click)="payment()">
+    去微信支付
+  </div>
+
+</div>

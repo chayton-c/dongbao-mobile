@@ -1,0 +1,33 @@
+<!--friendsHelpGoodsCoupons-->
+<div class="couponList">
+  <div
+    *ngFor="let coupon of friendsHelpGoodsCoupons;let i = index"
+    class="coupon"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/coupon/coupon-background.png)'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+    <div class="left">
+      <div class="amount">
+        <small>￥</small>
+        <span>{{coupon.amount}}</span>
+      </div>
+      <div class="quota">
+        满{{coupon.quota}}减{{coupon.amount}}
+      </div>
+    </div>
+
+    <div class="middle">
+      <div class="title">充值福利包</div>
+      <div class="description">仅可用于指定充值商品</div>
+      <div class="validityPeriod" *ngIf="coupon.timeLimited">有效期{{coupon.startTimeStr}}-{{coupon.endTimeStr}}</div>
+    </div>
+
+    <div class="right">
+      <div class="button" *ngIf="coupon.usable" (click)="jump2Purchase()">立即使用</div>
+      <div class="button" *ngIf="!coupon.usable" style="background-color: #FECFAC">即将开始</div>
+    </div>
+  </div>
+  <div *ngIf="friendsHelpGoodsCoupons.length == 0" class="none-style">
+    暂无可用券
+  </div>
+</div>

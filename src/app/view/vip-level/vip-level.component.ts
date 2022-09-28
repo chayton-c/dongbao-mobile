@@ -105,17 +105,6 @@ export class VipLevelComponent implements OnInit {
     });
   }
 
-  backPreviousPage(): void {
-    if (this.android) {
-      // @ts-ignore
-      window.Android.backPreviousPage('');
-    } else {
-      // @ts-ignore
-      window.webkit.messageHandlers.backPreviousPage.postMessage('');
-    }
-    return;
-  }
-
   jump2CardPage() {
     if (!this.customer.agentType) {
       this._toast.success("尚未开通代理权限");
@@ -153,11 +142,11 @@ export class VipLevelComponent implements OnInit {
       return;
     }
 
-    WebkitUtil.postMessage(new CustomHtmlComponentConstant().ELEME_CONVERT, this.vipLevelUpgradeCardPayment, this.android);
+    WebkitUtil.postMessageByCustomHtmlComponentOperationType(new CustomHtmlComponentConstant().ELEME_CONVERT, this.vipLevelUpgradeCardPayment, this.android);
   }
 
   jump2VipPayment() {
-    WebkitUtil.postMessage(new CustomHtmlComponentConstant().ELEME_CONVERT, this.vipLevelUpgradeVipPayment, this.android);
+    WebkitUtil.postMessageByCustomHtmlComponentOperationType(new CustomHtmlComponentConstant().ELEME_CONVERT, this.vipLevelUpgradeVipPayment, this.android);
   }
 
   jump2CustomHtml(url: any) {
@@ -166,7 +155,7 @@ export class VipLevelComponent implements OnInit {
       return;
     }
 
-    WebkitUtil.postMessage(
+    WebkitUtil.postMessageByCustomHtmlComponentOperationType(
       new CustomHtmlComponentConstant().NAVIGATE_TO_OHTER_PAGE, this.vipLevelUpgradeCardPayment, this.android, {
         router: this.router,
         redirectUrl: url,

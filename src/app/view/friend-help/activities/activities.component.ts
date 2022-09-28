@@ -6,6 +6,7 @@ import {Platform} from "@angular/cdk/platform";
 import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpUtils} from "../../../util/http/http-util";
+import {WebkitUtil} from "../../../util/webkit-util";
 
 @Component({
   selector: 'app-activities',
@@ -16,6 +17,7 @@ export class ActivitiesComponent implements OnInit {
 
   friendsHelpActivities: FriendsHelpActivity[] = [];
   customerId?: string;
+  android?: number;
 
   constructor(
     private http: HttpClient,
@@ -26,8 +28,10 @@ export class ActivitiesComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
     document.body.style.backgroundColor = '#080403';
 
+    this.titleService.setTitle("活动中心");
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
+      if (queryParams.android) this.android = queryParams.android;
     });
   }
 
@@ -45,11 +49,20 @@ export class ActivitiesComponent implements OnInit {
   }
 
   jump2ActivityInfo(friendsHelpActivity: FriendsHelpActivity) {
-    this.router.navigate(['/friends-help/activity-info'], {
-      queryParams: {
-        customerId: this.customerId,
-        id: friendsHelpActivity.id,
-      },
+    let redirectUrl = window.location.origin + "/friends-help/activity-info?customerId="
+      + this.customerId + "&id=" + friendsHelpActivity.id + "&android=" + this.android;
+
+    WebkitUtil.postMessage(WebkitUtil.CREATE_URL, {
+      copyBeforeAction: "",
+      shareBasePictureUrl: "",
+      text: "",
+      title: "",
+      url: "",
+      wxMiniprogramOriginalId: "",
+      wxMiniprogramPath: "",
+      wxMiniprogramQrcodeUrl: ""
+    }, this.android, {
+      customerId: "", redirectUrl: redirectUrl, router: this.router, title: "100元话费券免费领"
     });
   }
 

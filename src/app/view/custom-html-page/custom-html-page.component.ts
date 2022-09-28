@@ -101,7 +101,7 @@ export class CustomHtmlPageComponent implements OnInit {
         return;
       }
 
-      WebkitUtil.postMessage(operationType, activityLinkConvertInfo, this.android, {
+      WebkitUtil.postMessageByCustomHtmlComponentOperationType(operationType, activityLinkConvertInfo, this.android, {
         router: this.router,
         redirectUrl: customHtmlComponent.functionalText,
         customerId: this.customerId

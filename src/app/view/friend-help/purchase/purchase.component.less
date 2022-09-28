@@ -1,0 +1,272 @@
+.content {
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+
+  .tel-input {
+    background-color: #F3F1F3;
+    height: 20vw;
+    padding-top: 5vw;
+    width: 90vw;
+    margin-bottom: 2vw;
+    border-radius: 4vw;
+
+    .tel-input-label {
+      float: left;
+      width: 7vw;
+      margin-left: 5vw;
+      img {
+        width: 7vw;
+      }
+    }
+    .input {
+      margin-left: 2vw;
+      float: left;
+      width: 65vw;
+      font-weight: 700;
+      input {
+        width: 65vw;
+        font-size: 7vw;
+        line-height: 10vw;
+        border: none;
+        background-color: #F3F1F3;
+      }
+    }
+    .tel-input-clear {
+      float: left;
+      width: 7vw;
+      margin-top: 1.5vw;
+      img {
+        width: 7vw;
+      }
+    }
+  }
+
+  .label {
+    text-align: center;
+    height: 10vw;
+
+    .text {
+      color: #FE3560;
+      font-weight: 500;
+    }
+    .line {
+      width: 3vw;
+      height: 1vw;
+      border-bottom: 2px #FE3560 solid;
+      position: relative;
+      top: -0.5vw;
+      left: 43.5vw;
+    }
+  }
+
+  .goods-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2vw;
+    .goods {
+      width: 29.5vw;
+      height: 20vw;
+      border: 2px solid #FE819D;
+      border-radius: 1vw;
+      margin-bottom: 2vw;
+      .label {
+        width: 12vw;
+        height: 12vw;
+        img {
+          width: 12vw;
+          height: 12vw;
+        }
+      }
+      .price {
+        position: relative;
+        top: -8vw;
+        font-size: 5vw;
+        text-align: center;
+        font-weight: 500;
+      }
+      .actual-price {
+        position: relative;
+        top: -8vw;
+        text-align: center;
+        font-size: 3vw;
+      }
+    }
+  }
+
+//<div class="coupon-selection">
+//<div class="coupon-label">
+//<img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/coupon-label.png" alt=""/>
+//</div>
+//<div class="text">
+//优惠券  未选优惠券，最高5元可用
+//</div>
+//<div class="coupon-redirect-label">
+//<img src="http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/purchase/coupon-redirect-label.png" alt=""/>
+//</div>
+//</div>
+
+  .coupon-selection {
+    background-color: #FEF2F6;
+    height: 8vw;
+    width: 90vw;
+    margin-bottom: 3vw;
+    .coupon-label {
+      float: left;
+      width: 6.5vw;
+      height: 8vw;
+      padding-left: 2vw;
+      padding-top: 1.5vw;
+      img {
+        width: 3vw;
+      }
+    }
+    .text {
+      float: left;
+      color: #FF103A;
+      font-size: 3vw;
+      line-height: 8vw;
+      width: 79vw;
+    }
+    .coupon-redirect-label {
+      float: left;
+      width: 3vw;
+      padding-top: 1.5vw;
+      img {
+        width: 1.9vw;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2vw;
+    div {
+      width: 22vw;
+      height: 28vw;
+      img {
+        width: 22vw;
+        height: 22vw;
+      }
+      .text {
+        text-align: center;
+        width: 22vw;
+        position: relative;
+        top: -3vw;
+      }
+    }
+  }
+
+  .rules {
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 25px;
+    font-family: "SourceHanSansCN-Regular", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", SimSun, sans-serif;
+  }
+}
+
+.mask {
+  width: 100vw;
+  height: 278vw;
+  z-index: 998;
+  opacity: 65%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+}
+
+.purchaseModel {
+  position: fixed;
+  top: 15vh;
+  left: 0;
+  height: 85vh;
+  background-color: #FBFEFE;
+  z-index: 999;
+  width: 100vw;
+  border-radius: 4vw 4vw 0 0;
+  padding: 2vw 4vw; // 92vw
+
+  .title {
+    height: 8vh;
+    .order-price {
+      width: 92vw;
+      font-size: 9vw;
+      font-weight: 550;
+      text-align: center;
+    }
+    .close-btn {
+      width: 7vw;
+      position: relative;
+      top: -5.8vh;
+      left: 86vw;
+      img {
+        width: 7vw;
+      }
+    }
+  }
+
+  .order-info {
+    margin-top: 2vh;
+    height: auto;
+    .line {
+      height: 3vh;
+      margin-bottom: 1vh;
+      width: 92vw;
+      font-size: 4.5vw;
+      line-height: 4.5vw;
+      .label {
+        float: left;
+        color: #A4A5A5;
+      }
+      .value {
+        float: right;
+      }
+      .value-important {
+        float: right;
+        color: red;
+      }
+    }
+  }
+
+  .rules {
+    font-size: 1.8vh;
+    line-height: 3.2vh;
+    margin-bottom: 1vh;
+  }
+
+  .confirm-rules {
+    div {
+      border: 1px solid gray;
+      width: 3.5vw;
+      height: 3.5vw;
+      position: relative;
+      top: -5vw;
+    }
+    mat-checkbox {
+      font-size: 1.7vh;
+      line-height: 3.2vh;
+    }
+  }
+  .pay-button {
+    width: 80vw;
+    height: 15vw;
+    background-color: #FF0D43;
+    margin-left: 6vw;
+    text-align: center;
+    line-height: 15vw;
+    color: white;
+    font-size: 2.5vh;
+    border-radius: 2.5vh;
+  }
+}
+
+
+
+//animation: mainButtonSizeChange 2s infinite;
+//animation-direction: alternate;
+//animation-timing-function: ease-in-out;
