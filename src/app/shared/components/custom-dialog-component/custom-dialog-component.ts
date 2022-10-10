@@ -12,6 +12,9 @@ export class CustomDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<CustomDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
-      errorMsg: string
-    }) {}
+      errorMsg: string,
+      title?: string
+    }) {
+    document.body.style.backgroundColor = "#ffffff";
+  }
 }

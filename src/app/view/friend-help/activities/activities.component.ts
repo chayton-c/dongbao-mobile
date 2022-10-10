@@ -7,6 +7,8 @@ import {Title} from "@angular/platform-browser";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpUtils} from "../../../util/http/http-util";
 import {WebkitUtil} from "../../../util/webkit-util";
+import {MsgUtil} from "../../../util/msg-util";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-activities',
@@ -17,18 +19,18 @@ export class ActivitiesComponent implements OnInit {
 
   friendsHelpActivities: FriendsHelpActivity[] = [];
   customerId?: string;
-  android?: number;
+  android: number = 0;
 
   constructor(
     private http: HttpClient,
-    private _toast: ToastService,
+    public dialog: MatDialog,
     private platform: Platform,
     private titleService: Title,
     public router: Router,
     private activatedRoute: ActivatedRoute) {
     document.body.style.backgroundColor = '#080403';
 
-    this.titleService.setTitle("活动中心");
+    // this.titleService.setTitle("活动中心");
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
       if (queryParams.android) this.android = queryParams.android;
@@ -42,13 +44,19 @@ export class ActivitiesComponent implements OnInit {
     // 加载上级
     this.http.post('/api/mobile/friendsHelp/activity/list', HttpUtils.createBody(params), HttpUtils.createHttpOptions()).subscribe((res: any) => {
       if (!res.success) {
-        this._toast.fail("网络繁忙，请稍后再试!" + res.msg);
+        MsgUtil.showErrorMsg(this.dialog, res.msg);
+        return;
       }
       this.friendsHelpActivities = res.friendsHelpActivities;
     });
   }
 
   jump2ActivityInfo(friendsHelpActivity: FriendsHelpActivity) {
+    if (friendsHelpActivity.id != '1') {
+      MsgUtil.showErrorMsg(this.dialog, '活动已结束');
+      return;
+    }
+
     let redirectUrl = window.location.origin + "/friends-help/activity-info?customerId="
       + this.customerId + "&id=" + friendsHelpActivity.id + "&android=" + this.android;
 

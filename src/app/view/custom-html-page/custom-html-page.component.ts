@@ -86,12 +86,11 @@ export class CustomHtmlPageComponent implements OnInit {
 
     this.http.post('/api/mobile/custumHtmlComponent/parse', HttpUtils.createBody(params), HttpUtils.createHttpOptions()).subscribe((res: any) => {
       if (!res.success) {
-        // this._toast.fail("网络繁忙，请稍后再试!" + res.msg);
         return;
       }
 
       let activityLinkConvertInfo: ActivityLinkConvertInfo = res.activityLinkConvertInfo;
-      let operationType = customHtmlComponent.operationType;
+      let operationType = res.operationType;
       if (share)
         operationType = this.customHtmlComponentConstant.ELEME_SHARE;
 

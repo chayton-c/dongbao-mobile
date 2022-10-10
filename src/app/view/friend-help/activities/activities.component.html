@@ -24,8 +24,18 @@
     <div class="title">{{friendsHelpActivity.title}}</div>
     <div class="friendsRequired">{{friendsHelpActivity.friendsRequired}}人助力免费得</div>
     <div
+      *ngIf="friendsHelpActivity.id == '1'"
       class="button"
       [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/coupon-button.png)'"
+      [style.background-repeat]="'no-repeat'"
+      [style.background-size]="'100% 100%'"
+      (click)="jump2ActivityInfo(friendsHelpActivity)"
+    >
+    </div>
+    <div
+      *ngIf="friendsHelpActivity.id != '1'"
+      class="button"
+      [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activities/activity-finished-button.png)'"
       [style.background-repeat]="'no-repeat'"
       [style.background-size]="'100% 100%'"
       (click)="jump2ActivityInfo(friendsHelpActivity)"

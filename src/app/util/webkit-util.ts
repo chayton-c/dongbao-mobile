@@ -6,17 +6,18 @@ export class WebkitUtil {
 
   public static NONE = 0;
   public static BACK_PREVIOUS_PAGE = 1;
-  public static TAOBAO_CONVERT = 2;
-  public static JINGDONG_CONVERT = 3;
-  public static PINDUODUO_CONVERT = 4;
-  public static WECHAT_MINIPROGRAM = 5;
+  public static TAOBAO_CONVERT = 2; // 跳转淘宝
+  public static JINGDONG_CONVERT = 3; // 跳转京东
+  public static PINDUODUO_CONVERT = 4; // 跳转拼多多
+  public static WECHAT_MINIPROGRAM = 5; // 跳转到小程序
   public static MEITUAN_WECHAT_MINIPROGRAM = 6;
   public static COPY_AND_SHARE_IMAGE_THEN_SHARE_ON_WECHAT_MINIPROGRAM = 7;
   public static TEXT_SHARE = 8;
   public static MEITUANYOUXUAN_WECHAT_MINIPROGRAM = 9;
-  public static REDIRECT_TO_H5 = 10;
+  public static REDIRECT_TO_H5 = 10; // 重定向到h5
   public static NAVIGATE_TO_OTHER_PAGE = 11;
   public static CREATE_URL = 12;
+  public static ELEME_APP = 13; // 跳转app
 
 
   static postMessageByCustomHtmlComponentOperationType(
@@ -53,7 +54,10 @@ export class WebkitUtil {
         webkitUtilOperationType = WebkitUtil.PINDUODUO_CONVERT;
         break;
       }
-
+      // case customHtmlComponentConstant.ELEME_CONVERT: {
+      //   webkitUtilOperationType = WebkitUtil.ELEME_APP;
+      //   break;
+      // }
       case customHtmlComponentConstant.ELEME_CONVERT:
       case customHtmlComponentConstant.AMAP_CONVERT:
       case customHtmlComponentConstant.JUTUIKE_CONVERT: {
@@ -78,14 +82,8 @@ export class WebkitUtil {
         webkitUtilOperationType = WebkitUtil.MEITUANYOUXUAN_WECHAT_MINIPROGRAM;
         break;
       }
-      case customHtmlComponentConstant.REDIRECT_TO_H5: {
-        webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
-        break;
-      }
-      case customHtmlComponentConstant.JUTUIKE_VIP_CARD_CONVERT: {
-        webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
-        break;
-      }
+      case customHtmlComponentConstant.REDIRECT_TO_H5:
+      case customHtmlComponentConstant.JUTUIKE_VIP_CARD_CONVERT:
       case customHtmlComponentConstant.JUTUIKE_H5_CONVERT: {
         webkitUtilOperationType = WebkitUtil.REDIRECT_TO_H5;
         break;
@@ -230,6 +228,7 @@ export class WebkitUtil {
       }
       case WebkitUtil.NAVIGATE_TO_OTHER_PAGE: {
         let redirectUrl = pageRedirectInfo!.redirectUrl;
+        console.log(pageRedirectInfo);
         let id = WebkitUtil.getQueryVar('id', redirectUrl);
 
         if (android) {
@@ -254,6 +253,7 @@ export class WebkitUtil {
             text: "", copyBeforeAction: "", title: ""
           }
           let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
+          console.log(s);
           // @ts-ignore
           window.webkit.messageHandlers.redirectToUrl.postMessage(s);
         }
@@ -261,19 +261,40 @@ export class WebkitUtil {
       }
       case WebkitUtil.CREATE_URL: {
         let redirectUrl = pageRedirectInfo!.redirectUrl;
+        console.log(pageRedirectInfo);
 
         if (android) {
           window.location.href = pageRedirectInfo!.redirectUrl;
         } else {
+          if (redirectUrl.indexOf("?") == -1)
+            redirectUrl += "?a=1";
+          if (redirectUrl.indexOf("customerId") == -1)
+            redirectUrl += "&customerId=" + pageRedirectInfo!.customerId;
+          if (redirectUrl.indexOf("ios") == -1)
+            redirectUrl += "&ios=1";
+
           let activityLinkConvertInfo: ActivityLinkConvertInfo = {
             shareBasePictureUrl: "", url: redirectUrl, wxMiniprogramOriginalId: "", wxMiniprogramPath: "", wxMiniprogramQrcodeUrl: "",
             text: "", copyBeforeAction: "", title: pageRedirectInfo!.title
           };
           let s = activityLinkConvertInfo ? JSON.stringify(activityLinkConvertInfo) : "";
+          console.log(s);
           // @ts-ignore
           window.webkit.messageHandlers.redirectToUrl.postMessage(s);
         }
         return;
+      }
+      case WebkitUtil.ELEME_APP : {
+        console.log("ELEME_APP")
+
+        if (android) {
+          // @ts-ignore
+          window.Android.elemeApp(s);
+        } else {
+          // @ts-ignore
+          window.webkit.messageHandlers.elemeApp.postMessage(s);
+        }
+        break;
       }
       case WebkitUtil.NONE:
       default: {
@@ -281,8 +302,6 @@ export class WebkitUtil {
       }
     }
 
-    if (operationType == customHtmlComponentConstant.NAVIGATE_TO_OHTER_PAGE) {
-    }
   }
 
   static wechatPayment(paymentParams: any, android: number) {
