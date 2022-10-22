@@ -27,6 +27,7 @@ export class CustomHtmlPageComponent implements OnInit {
       if (queryParams.customerId) this.customerId = queryParams.customerId;
       if (queryParams.android) this.android = queryParams.android;
       if (queryParams.ios) this.ios = queryParams.ios;
+      if (queryParams.cityName) this.cityName = queryParams.cityName;
 
       this.loadDataFromServer();
     });
@@ -57,6 +58,7 @@ export class CustomHtmlPageComponent implements OnInit {
   android: number = 0;
   ios: number = 0;
   id: string = "";
+  cityName: string = "";
 
   ngOnInit(): void {
   }
@@ -65,7 +67,8 @@ export class CustomHtmlPageComponent implements OnInit {
     // this.loading = true;
     let params = {
       id: this.id,
-      customerId: this.customerId
+      customerId: this.customerId,
+      cityName: this.cityName
     }
 
     this.http.post('/api/mobile/customHtml/init', HttpUtils.createBody(params), HttpUtils.createHttpOptions()).subscribe((res: any) => {

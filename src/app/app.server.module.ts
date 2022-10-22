@@ -3,11 +3,6 @@ import { ServerModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import {RouterModule, Routes} from "@angular/router";
-import {TestComponent} from "./view/test/test.component";
-import {CustomHtmlConstant} from "./pojo/custom-html/custom-html";
-import {CustomHtmlPageComponent} from "./view/custom-html-page/custom-html-page.component";
-import {CustomHtmlPageRoutingModule} from "./view/custom-html-page/custom-html-page-routing.module";
 
 @NgModule({
   imports: [

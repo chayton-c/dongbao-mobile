@@ -17,9 +17,6 @@ ng generate module module-name:它将生成一个带有 name 的模块new-module
 --routing true:生成路由和一个默认延迟加载的组件
 --route path-string: path-string将作为路由器添加到父模块路由配置中。
 
-// 生成惰性加载模块下的组件
-ng g c view/friends-help/activities --module friends-help-routing
-然后在friends-help-routing.module.ts的routes中手动添加路由（我不会更好的命令，只能手动添加了）
 
 预渲染
 npm run prerender

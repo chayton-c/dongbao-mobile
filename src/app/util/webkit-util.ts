@@ -29,7 +29,8 @@ export class WebkitUtil {
       redirectUrl: string,
       customerId: string
     }
-  ) {
+  )
+  {
     let customHtmlComponentConstant: CustomHtmlComponentConstant = new CustomHtmlComponentConstant();
 
     let webkitUtilOperationType: number;

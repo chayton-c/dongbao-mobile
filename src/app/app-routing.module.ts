@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'friends-help/coupon', loadChildren: () => import('./view/friend-help/coupon/coupon.module').then(m => m.CouponModule) },
   { path: 'friends-help/orders', loadChildren: () => import('./view/friend-help/orders/orders.module').then(m => m.OrdersModule) },
   { path: 'friends-help/purchase', loadChildren: () => import('./view/friend-help/purchase/purchase.module').then(m => m.PurchaseModule) },
+  { path: 'friends-help/eleme-activity', loadChildren: () => import('./view/friend-help/eleme-activity/eleme-activity.module').then(m => m.ElemeActivityModule) },
 ];
 
 @NgModule({
@@ -25,4 +26,6 @@ const routes: Routes = [
 })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}

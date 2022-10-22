@@ -49,8 +49,9 @@
        [style.background-size]="'100% auto'">
   </div>
 
+  <!-- id=-1为饿了么活动，无法直接购买 -->
   <div class="button"
-       *ngIf="!this.hasSettlementRecord"
+       *ngIf="!this.hasSettlementRecord && id != '-1'"
        (click)="payment()"
        [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/friends-help/activity-info/purchase-button.png)'"
        [style.background-repeat]="'no-repeat'"

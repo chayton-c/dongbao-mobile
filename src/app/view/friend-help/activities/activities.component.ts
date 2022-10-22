@@ -52,7 +52,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   jump2ActivityInfo(friendsHelpActivity: FriendsHelpActivity) {
-    if (friendsHelpActivity.id != '1') {
+    if (friendsHelpActivity.id != '1' && friendsHelpActivity.id != '-1') {
       MsgUtil.showErrorMsg(this.dialog, '活动已结束');
       return;
     }
