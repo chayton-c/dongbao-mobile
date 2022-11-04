@@ -93,6 +93,11 @@ export class WebkitUtil {
         webkitUtilOperationType = WebkitUtil.NAVIGATE_TO_OTHER_PAGE;
         break;
       }
+      case customHtmlComponentConstant.ELEME_XCX_ORIGINAL_ID: {
+        webkitUtilOperationType = WebkitUtil.WECHAT_MINIPROGRAM;
+        break;
+      }
+
       default: webkitUtilOperationType = WebkitUtil.NONE;
     }
     WebkitUtil.postMessage(webkitUtilOperationType, activityLinkConvertInfo, android, pageRedirectInfo);
@@ -309,7 +314,7 @@ export class WebkitUtil {
     console.log("wechatPayment")
     let s = paymentParams ? JSON.stringify(paymentParams) : "";
 
-    if (android) {
+    if (android && android != 0) {
       // @ts-ignore
       window.Android.wechatPayment(s);
     } else {

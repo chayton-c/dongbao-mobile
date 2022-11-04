@@ -32,13 +32,11 @@ export class WechatAuthComponent implements OnInit {
   appid?: string = "wx9df689926d70eabb";
   parentAvatar?: string;
   parentDisplayName?: string;
-  akagi?: string;
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((queryParams) => {
       if (queryParams.code) this.code = queryParams.code;
       if (queryParams.e) this.parentCustomerId = queryParams.e;
-      if (queryParams.akagi) this.akagi = queryParams.akagi;
     });
 
     let params = {
@@ -71,28 +69,24 @@ export class WechatAuthComponent implements OnInit {
   }
 
   jump2download(): void {
-    // if (!this.code && this.isWechat()) {
-    //   let rawUri = window.location.href;
-    //   let encode = encodeURI(rawUri);
-    //
-    //   if (this.akagi) {
-    //     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + this.appid + "&redirect_uri=" + encode + "&response_type=code&scope=snsapi_userinfo&forcePopup=true&forceSnapShot=true&state=123#wechat_redirect";
-    //     return;
-    //   }
-    //
-    //   window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + this.appid + "&redirect_uri=" + encode + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-    //   return;
-    // }
+    if (!this.code && this.isWechat()) {
+      let rawUri = window.location.href;
+      let encode = encodeURI(rawUri);
+
+      window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + this.appid + "&redirect_uri=" + encode + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+      return;
+    }
 
 
     if (this.isWechat()) {
-      this.showShadow = true;
+      window.location.href = "https://a.app.qq.com/o/simple.jsp?pkgname=com.provincemany";
+      // this.showShadow = true;
       return;
     } else if (this.platform.IOS) {
       window.location.href = "https://apps.apple.com/cn/app/%E5%A4%96%E5%8D%96%E7%9C%81%E5%A4%9A%E5%A4%9A-%E7%A7%81%E5%9F%9F%E6%B5%81%E9%87%8F%E5%8F%98%E7%8E%B0%E7%A5%9E%E5%99%A8/id1606496332";
       return;
     } else if (this.platform.ANDROID) {
-      window.location.href = "http://shenghenduooss.gohong.com/android/shengduoduo.apk";
+      window.location.href = "https://shenghenduooss.gohong.com/android/shengduoduo.apk";
       return;
     }
 

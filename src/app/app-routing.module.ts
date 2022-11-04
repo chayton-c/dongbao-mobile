@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'friends-help/orders', loadChildren: () => import('./view/friend-help/orders/orders.module').then(m => m.OrdersModule) },
   { path: 'friends-help/purchase', loadChildren: () => import('./view/friend-help/purchase/purchase.module').then(m => m.PurchaseModule) },
   { path: 'friends-help/eleme-activity', loadChildren: () => import('./view/friend-help/eleme-activity/eleme-activity.module').then(m => m.ElemeActivityModule) },
+  { path: 'order-retrieval', loadChildren: () => import('./view/order-retrieval/order-retrieval.module').then(m => m.OrderRetrievalModule) },
 ];
 
 @NgModule({

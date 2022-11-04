@@ -38,6 +38,8 @@ export class CustomHtmlComponentConstant {
   public readonly JUTUIKE_VIP_CARD_CONVERT = 16; // 聚推客会员卡转链
   public readonly JUTUIKE_H5_CONVERT = 17; // 聚推客h5转链
   public readonly JUTUIKE_H5_SHARE = 18; // 聚推客h5分享
+  public readonly ELEME_XCX_ORIGINAL_ID = 23; // 饿了么红包，微信小程序
+
 
 
   // componentType

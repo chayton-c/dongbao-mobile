@@ -1,0 +1,176 @@
+<div
+  [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/background.png)'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'100% auto'">
+  <div style="height: 25vh"></div>
+
+  <!-- 我的余额 -->
+  <div
+    class="card"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/card-title.png)'"
+    [style.background-color]="'#FEFEFE'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+    <div class="title">我的余额</div>
+    <div class="content">
+      <div class="commission">{{customerAvailableCashAmount.toFixed(2)}}</div>
+      <div class="btn" style="padding-top: 10px">
+        <div
+          (click)="withdrawn()"
+          class="confirm-button"
+          [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/config-btn.png)'"
+          [style.background-repeat]="'no-repeat'"
+          [style.background-size]="'100% auto'">
+          提现
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 上传凭证 -->
+  <div
+    (click)="auth()"
+    class="card"
+    [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/card-title.png)'"
+    [style.background-color]="'#FEFEFE'"
+    [style.background-repeat]="'no-repeat'"
+    [style.background-size]="'100% auto'">
+    <div class="title">上传凭证</div>
+    <div class="content">
+      <div class="input">
+        <input type="text"
+               [(ngModel)]="orderNumber"
+               name="orderNumber"
+               placeholder="完成订单点击粘贴订单编号">
+        <span (click)="copyOrderTutorial = true">如何复制订单号?</span>
+      </div>
+
+      <div>
+        <div class="remark">
+          <span>*</span>上传集赞截图
+        </div>
+        <div class="explanation">
+          ↓截图1需含朋友圈集赞头像
+          <a (click)="showUploadImageDescription = true">查看示例图</a>
+        </div>
+        <ImagePicker
+          [files]="files"
+          [multiple]="false"
+          [selectable]="files.length < 1"
+          (onChange)="fileChange($event)"
+        ></ImagePicker>
+        <div class="remark"><span>*</span>请务必保证朋友圈集赞包含点赞头像</div>
+      </div>
+
+      <div class="btn" style="position: relative;top: -25px">
+        <div
+          (click)="submit()"
+          class="confirm-button"
+          [style.background-image]="'url(http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/config-btn.png)'"
+          [style.background-repeat]="'no-repeat'"
+          [style.background-size]="'100% auto'">
+          提交
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 订单信息 -->
+  <div class="card" *ngIf="retrievedOrder">
+    <div class="order-title" [ngSwitch]="retrievedOrder.orderStatus">
+      <span class="order-title-text">
+        {{retrievedOrder.goodsTitle}}
+      </span>
+      <span class="order-status" style="color: blue" *ngSwitchCase="CommissionOrder.ORDER_HAS_BEEN_PLACE">
+        已下单
+      </span>
+      <span class="order-status" style="color: green" *ngSwitchCase="CommissionOrder.ORDER_HAS_BEEN_SETTLED_SUCCESSFULLY">
+        结算成功
+      </span>
+      <span class="order-status" style="color: gray" *ngSwitchCase="CommissionOrder.ORDER_HAS_BEEN_CLOSED">
+        已关闭
+      </span>
+      <span class="order-status" style="color: gray" *ngSwitchCase="CommissionOrder.ORDER_HAS_BEEN_REFUND">
+        已维权
+      </span>
+    </div>
+
+    <div class="order-info">
+      <img [src]="retrievedOrder.orderImage" alt=""/>
+      <div class="order-number">
+        订单编号: {{retrievedOrder.orderNumber}}
+      </div>
+      <div class="order-number">
+        下单时间: {{retrievedOrder.orderTime}}
+      </div>
+      <div class="order-price">
+        <span>￥{{retrievedOrder.orderPrice}}</span>
+        <span style="color: #F71D1D;margin-left: 15px;font-weight: 550">补贴￥</span>
+        <span style="color: #F71D1D;font-weight: 550;font-size: 20px">
+          {{retrievedOrder.customerCommission ? retrievedOrder.customerCommission.toFixed(2) : (retrievedOrder.orderPrice >= 8 ? 8 : retrievedOrder.orderPrice)}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 规则 -->
+  <div class="card">
+    <h3 class="rule-title">免单活动规则</h3>
+    <div class="rule-item">①朋友圈分享海报集赞15个</div>
+    <div class="rule-item">②活动当天提交外卖订单编号及集赞截图</div>
+    <div class="rule-item">③金额大于8元补贴8元，金额小于等于8元全额补贴</div>
+    <div class="rule-item">④完成订单后官方审核通过后发放奖励</div>
+    <div class="rule-item">⑤18点之前的订单当天审核 18点之后次日审核</div>
+  </div>
+  <div style="height: 5vh"></div>
+</div>
+
+<!-- 提现 -->
+<div>
+  <!-- 模态框mask -->
+  <div class="mask"
+       *ngIf="showWithdrawn"
+       (click)="showWithdrawn = false">
+  </div>
+  <img class="withdrawnAlert"
+       (click)="jump2download()"
+       *ngIf="showWithdrawn"
+       src="http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/withdrawn-alert.png" alt=""/>
+</div>
+
+<!-- 查看示例图 -->
+<div>
+  <!-- 模态框mask -->
+  <div class="mask"
+       *ngIf="showUploadImageDescription"
+       (click)="showUploadImageDescription = false">
+  </div>
+  <img class="withdrawnAlert"
+       *ngIf="showUploadImageDescription"
+       (click)="showUploadImageDescription = false"
+       src="http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/upload-image-description.jpg" alt=""/>
+</div>
+
+<!-- 如何复制订单号 -->
+<div>
+  <!-- 模态框mask -->
+  <div class="mask"
+       *ngIf="copyOrderTutorial"
+       (click)="copyOrderTutorial = false">
+  </div>
+  <img class="withdrawnAlert"
+       (click)="copyOrderTutorial = false"
+       style="position: absolute;top: 20vh;"
+       *ngIf="copyOrderTutorial"
+       src="http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/order-number-tutorial1.jpg" alt=""/>
+  <img class="withdrawnAlert"
+       (click)="copyOrderTutorial = false"
+       style="position: absolute;top: 120vh;"
+       *ngIf="copyOrderTutorial"
+       src="http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/order-number-tutorial2.jpg" alt=""/>
+  <img class="withdrawnAlert"
+       (click)="copyOrderTutorial = false"
+       style="position: absolute;top: 220vh;"
+       *ngIf="copyOrderTutorial"
+       src="http://shenghenduooss.gohong.com/dongbao-mobile/order-retrieval/order-number-tutorial3.jpg" alt=""/>
+</div>
